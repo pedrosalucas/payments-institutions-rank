@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,37 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model tb_irregularidade_por_if {
+  id                                    Int     @id @default(autoincrement())
+  ds_ano                                Int
+  ds_trimestre                          String  @db.VarChar(2)
+  ds_categoria                          String  @db.VarChar(100)
+  tp_instituicao                        String  @db.VarChar(50)
+  ds_cnpj_if                            String? @db.VarChar(11)
+  nm_instituicao_financeira             String  @db.VarChar(150)
+  ds_irregularidade                     String? @db.VarChar(250)
+  qtd_reclamacoes_reguladas_procedentes Int?    @default(0)
+  qtd_reclamacoes_reguladas_outras      Int?    @default(0)
+  qtd_reclamacoes_nao_reguladas         Int?    @default(0)
+  qtd_total_reclamacoes                 Int?    @default(0)
+}
+
+model tb_reclamacao_cliente_por_if {
+  id                                    Int     @id @default(autoincrement())
+  ds_ano                                Int
+  ds_trimestre                          String  @db.VarChar(2)
+  ds_categoria                          String  @db.VarChar(100)
+  tp_instituicao                        String  @db.VarChar(50)
+  ds_cnpj_if                            String? @db.VarChar(11)
+  nm_instituicao_financeira             String  @db.VarChar(150)
+  vl_indice                             String? @db.VarChar(20)
+  qtd_reclamacoes_reguladas_procedentes Int?    @default(0)
+  qtd_reclamacoes_reguladas_outras      Int?    @default(0)
+  qtd_reclamacoes_nao_reguladas         Int?    @default(0)
+  qtd_total_reclamacoes                 Int?    @default(0)
+  qtd_clientes_ccs_scr                  Int?    @default(0)
+  qtd_clientes_ccs                      Int?    @default(0)
+  qtd_clientes_scr                      Int?    @default(0)
 }
