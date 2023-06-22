@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/core": "^2.3.8",
+    "@geist-ui/icons": "^1.0.2",
     "@prisma/client": "^4.15.0",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",

@@ -1,10 +1,34 @@
 .main {
-  display: flex;
+  
   flex-direction: column;
+  /*justify-content: space-around;
+  align-items: center;*/
+  padding: 2vh 10vh;
+}
+
+.navbar {
+  background-color: #111;
   justify-content: space-between;
+  display: flex;
   align-items: center;
-  padding: 2rem;
-  min-height: 100vh;
+  padding: 2vh 10vh;
+}
+
+.container {
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.containerModule {
+  display: grid;
+  justify-content: center;
+}
+
+.modules {
+  background-color: #111;
+  flex-grow: 1;
+  margin-top: 1vh;
 }
 
 .description {
