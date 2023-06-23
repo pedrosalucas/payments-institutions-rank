@@ -27,15 +27,11 @@ export default function Home() {
         </div>
         
       </main>	
-      <div className={styles.modules}>
-        <Grid.Container gap={1} justify='center' height="650px">
-          <Grid xs={15}>
-            <Card shadow width="100%"></Card>
-          </Grid>
-          <Grid xs={8} >
-            <Card shadow width="100%"></Card>
-          </Grid>
-        </Grid.Container>
+      <div className={styles.appcontainer}>
+        <div className={styles.modules}>
+          <table>oi</table>
+        </div>
+        
       </div>
       
     </>

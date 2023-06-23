@@ -21,14 +21,24 @@
 }
 
 .containerModule {
-  display: grid;
-  justify-content: center;
+  flex:1;
+  background-color: white;
 }
 
 .modules {
-  background-color: #111;
-  flex-grow: 1;
+  background-color: #444;
+  flex: 1;
   margin-top: 1vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
 }
 
 .description {
