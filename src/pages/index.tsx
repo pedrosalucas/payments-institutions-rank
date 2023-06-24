@@ -2,16 +2,10 @@ import Head from 'next/head'
 import { Text, Spacer, Table} from '@geist-ui/core'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
-import Cards from '@/components/cards/cards'
-import { Inter } from 'next/font/google'
-
-
 
 const inter = Inter({ subsets: ['vietnamese'] })
 
 export default function Home() {
-  
-
   return (
     <>
       <Head>
