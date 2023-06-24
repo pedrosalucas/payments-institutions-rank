@@ -9,12 +9,12 @@ export default function Cards () {
         <div className={styles.grid}>
           <a
             href="#" className={styles.card}
-            onClick={() => router.push('/perguntas/pergunta1')}
+            onClick={() => router.push('/pergunta1')}
           >
             <h2>
               Pergunta 1 <span>-&gt;</span>
             </h2>
-            <p>
+            <p style={{textAlign:'justify'}}>
             Quais são as instituições financeiras com o maior índice de reclamações em cada período de referência?
             </p>
           </a>
@@ -22,132 +22,117 @@ export default function Cards () {
           <a
             href="#"
             className={styles.card}
-            onClick={() => router.push('/perguntas/pergunta2')}
+            onClick={() => router.push('/pergunta2')}
           >
             <h2>
-            Question 2 <span>-&gt;</span>
+              Pergunta 2 <span>-&gt;</span>
             </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            <p style={{textAlign:'justify'}}>
+            Qual é a variação do índice de reclamações ao longo do tempo para as 5 instituições financeiras com o maior número de clientes?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+             href="#"
+             className={styles.card}
+             onClick={() => router.push('/pergunta3')}
           >
             <h2>
-              Question 3 <span>-&gt;</span>
+              Pergunta 3 <span>-&gt;</span>
             </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
+            <p style={{textAlign:'justify'}}>
+              Quantas reclamações o(a) [instituição/banco] obteve em determinado período de tempo?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta4')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 4 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+              Existe alguma relação entre o tamanho do(a) [instituição/banco] (número de clientes, por exemplo) e o seu índice de reclamações?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta5')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 5 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+             Quais são as 10 [instituições financeiras/bancos] que apresentaram a maior redução no índice de reclamações em relação ao ano anterior?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta6')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 6 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+              Qual relação entre a quantidade de clientes [CCS/SCR] e o índice de reclamações de um(a) determinado(a) [banco/instituição financeira]?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta7')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 7 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+              Qual a relação entre um banco/instituição estar no “Top 15 - Bancos, Financeiras e Instituições de Pagamento” e o seu número de reclamações em determinado período?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta8')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 8 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+            Qual empresa apresenta o maior número de reclamações reguladas procedentes e o menor número de reclamações não reguladas em determinado ano?
             </p>
           </a>
           
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta9')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 9 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+              Quais as 15 empresas com maior número de reclamações não reguladas em relação a quantidade de reclamações em determinado ano?
             </p>
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href="#"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => router.push('/pergunta10')}
           >
             <h2>
-              Question 4 <span>-&gt;</span>
+              Pergunta 10 <span>-&gt;</span>
             </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
+            <p style={{textAlign:'justify'}}>
+              Quais são as 10 instituições financeiras com o maior número absoluto de reclamações em cada período de referência?
             </p>
           </a>
         </div>

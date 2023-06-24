@@ -1,0 +1,33 @@
+.grid {
+    margin-top: 2vh;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  
+  .table {
+    margin: 2vh;
+    display: block;
+    overflow: hidden;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 10px;
+    white-space: nowrap;
+
+    overflow-y: scroll;
+  }
+
+  
+  .tablethead {
+    background-color: #222;
+    color: white;
+    
+  }
+  
+  .tablettd , .tabletth{
+   text-align: center;
+   padding: 0.8rem;
+  }
+  
+  
+  
