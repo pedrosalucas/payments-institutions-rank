@@ -25,6 +25,23 @@
   background-color: white;
 }
 
+.ariatablewrapper {
+  width: 300px;
+  overflow: auto;
+}
+
+.ariatable {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: fit-content;
+
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  
+}
+
 .modules {
   background-color: #444;
   flex: 1;
@@ -35,11 +52,10 @@
   height: 100%;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh; 
+.userlight {
+  color: red;
 }
+
 
 .description {
   display: inherit;
@@ -76,8 +92,11 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
+  width: 100%;
+  border-radius: 8px;
+  outline: auto;
+  outline-offset: 2vh;
+  
 }
 
 .card {
@@ -168,7 +187,7 @@
   .grid {
     grid-template-columns: 1fr;
     margin-bottom: 120px;
-    max-width: 320px;
+    max-width: 100%;
     text-align: center;
   }
 
