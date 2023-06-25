@@ -1,23 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState } from 'react'
-import { PrismaClient,  tb_reclamacao_cliente_por_if} from "@prisma/client";
-import { prisma } from '@/db'
+import { tb_reclamacao_cliente_por_if} from "@prisma/client";
+import { getResposta } from '@/services/perguntas_v1';
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export async function getStaticProps(){
-	const data = await prisma.$queryRaw`SELECT ds_ano, ds_trimestre, nm_instituicao_financeira, vl_indice
-	FROM tb_reclamacao_cliente_por_if AS t1
-	WHERE vl_indice = (
-			SELECT MAX(vl_indice)
-			FROM tb_reclamacao_cliente_por_if AS t2
-			WHERE t1.ds_ano = t2.ds_ano AND t1.ds_trimestre = t2.ds_trimestre
-	)
-	ORDER BY ds_ano, ds_trimestre;`;
+	const data = await getResposta(1);
 	console.log(data);
 	return {
 		props: {
@@ -43,7 +35,6 @@ export default function Home({initialData}: {initialData:tb_reclamacao_cliente_p
 						<h4>{c.nm_instituicao_financeira}</h4>
 					</div>
 				))}
-				<button>teste</button>
       </main>
     </>
   )
