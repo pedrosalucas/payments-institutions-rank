@@ -13,7 +13,9 @@ export default async function handler(
 	const data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
 		SELECT nm_instituicao_financeira, qtd_clientes_ccs_scr, vl_indice
 		FROM tb_reclamacao_cliente_por_if
-		ORDER BY qtd_clientes_ccs_scr DESC;
+		WHERE qtd_clientes_ccs_scr IS NOT NULL
+		ORDER BY qtd_clientes_ccs_scr DESC
+		LIMIT 50;
 	`;
 
 	switch (requestMethod) {

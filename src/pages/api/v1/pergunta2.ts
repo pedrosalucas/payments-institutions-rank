@@ -11,15 +11,24 @@ export default async function handler(
 
 	//Consulta Pergunta 2 (sem filtragem)
 	const data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
-		SELECT ds_ano, ds_trimestre, nm_instituicao_financeira, vl_indice
-		FROM tb_reclamacao_cliente_por_if
-		WHERE nm_instituicao_financeira IN (
-				SELECT nm_instituicao_financeira
+	SELECT ds_ano, ds_trimestre, nm_instituicao_financeira, vl_indice
+	FROM tb_reclamacao_cliente_por_if
+	WHERE ds_categoria IN ('Top 10', 'Mais de quatro milhões de clientes', 'Top 15 - Bancos, Financeiras e Instituições de Pagamento')
+		AND nm_instituicao_financeira IN (
+			SELECT nm_instituicao_financeira
+			FROM tb_reclamacao_cliente_por_if
+			WHERE ds_categoria IN ('Top 10', 'Mais de quatro milhões de clientes', 'Top 15 - Bancos, Financeiras e Instituições de Pagamento')
+			GROUP BY nm_instituicao_financeira
+			HAVING COUNT(*) = (
+				SELECT COUNT(*)
 				FROM tb_reclamacao_cliente_por_if
+				WHERE ds_categoria IN ('Top 10', 'Mais de quatro milhões de clientes', 'Top 15 - Bancos, Financeiras e Instituições de Pagamento')
 				GROUP BY nm_instituicao_financeira
-				HAVING COUNT(*) >= 4 -- Valor que define o mínimo de trimestres em que a instituição aparece em todas as tabelas
+				ORDER BY COUNT(*) DESC
+				LIMIT 1
+			)
 		)
-		ORDER BY nm_instituicao_financeira, ds_ano, ds_trimestre;
+	ORDER BY ds_ano, ds_trimestre;
 	`;
 
 	switch (requestMethod) {

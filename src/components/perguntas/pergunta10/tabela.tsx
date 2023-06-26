@@ -2,30 +2,13 @@ import React from 'react';
 import styles from "@/styles/Perguntas.module.css";
 import { tb_reclamacao_cliente_por_if} from "@prisma/client";
 
-/*interface TableData {
-  ds_ano: number;
-  ds_trimestre: string;
-  nm_instituicao_financeira: string;
-  vl_indice: string;
-}*/
 interface TableProps {
   data: tb_reclamacao_cliente_por_if[];
 }
 
-const Pergunta2: React.FC<TableProps> = ({ data }) => {
-  const formatVlIndice = (value: string | null) => {
-    if (value === null){
-      return 0;
-    }
-    const cleanedValue = value.replace(",", ".");
-    return parseFloat(cleanedValue);
-  };
+const Pergunta8: React.FC<TableProps> = ({ data }) => {
 
-  const sortedData = data.sort((a, b) => {
-    const anoA = (a.ds_ano);
-    const anoB = (b.ds_ano);
-    return anoA - anoB;
-  });
+  
 
   return (
     <div className={styles.tablewrapper}>
@@ -34,17 +17,17 @@ const Pergunta2: React.FC<TableProps> = ({ data }) => {
           <tr className={`${styles.tablethead} ${styles.tabletth}`}>
             <th className={styles.tabletth}>Ano</th>
             <th className={styles.tabletth}>Trimestre</th>
-            <th className={styles.tabletth}>Instituição Financeira/Banco</th>
-            <th className={styles.tabletth}>Índice</th>
+            <th className={styles.tabletth}>Instituição Financeira</th>
+            <th className={styles.tabletth}>Quantidade Absoluta de Reclamações</th>
           </tr>
         </thead>
         <tbody className={styles.expand}>
-          {sortedData.map((item, index) => (
+          {data.map((item, index) => (
             <tr key={index} className={styles.tablettd}>
               <td className={styles.tablettd}>{item.ds_ano}</td>
               <td className={styles.tablettd}>{item.ds_trimestre}</td>
               <td className={styles.tablettd}>{item.nm_instituicao_financeira}</td>
-              <td className={styles.tablettd}>{formatVlIndice(item.vl_indice)}</td>
+              <td className={styles.tablettd}>{item.qtd_total_reclamacoes}</td>
             </tr>
           ))}
         </tbody>
@@ -54,4 +37,4 @@ const Pergunta2: React.FC<TableProps> = ({ data }) => {
   );
 };
 
-export default Pergunta2;
+export default Pergunta8;

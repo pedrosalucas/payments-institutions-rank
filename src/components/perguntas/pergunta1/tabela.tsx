@@ -1,31 +1,34 @@
 import React from 'react';
 import styles from "@/styles/Perguntas.module.css";
+import { tb_reclamacao_cliente_por_if} from "@prisma/client";
 
-interface TableData {
+/*interface TableData {
   ds_ano: number;
   ds_trimestre: string;
   nm_instituicao_financeira: string;
   vl_indice: string;
-}
-
+}*/
 interface TableProps {
-  data: TableData[];
+  data: tb_reclamacao_cliente_por_if[];
 }
 
 const Pergunta1: React.FC<TableProps> = ({ data }) => {
-  const formatVlIndice = (value: string) => {
+  const formatVlIndice = (value: string | null) => {
+    if (value === null){
+      return 0;
+    }
     const cleanedValue = value.replace(",", ".");
     return parseFloat(cleanedValue);
   };
 
   const sortedData = data.sort((a, b) => {
-    const trimestreA = parseInt(a.ds_trimestre);
-    const trimestreB = parseInt(b.ds_trimestre);
-    return trimestreA - trimestreB;
+    const anoA = (a.ds_ano);
+    const anoB = (b.ds_ano);
+    return anoA - anoB;
   });
 
   return (
-    <div>
+    <div className={styles.tablewrapper}>
       <table className={styles.table}>
         <thead>
           <tr className={`${styles.tablethead} ${styles.tabletth}`}>
@@ -35,7 +38,7 @@ const Pergunta1: React.FC<TableProps> = ({ data }) => {
             <th className={styles.tabletth}>Índice</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.expand}>
           {sortedData.map((item, index) => (
             <tr key={index} className={styles.tablettd}>
               <td className={styles.tablettd}>{item.ds_ano}</td>
@@ -47,6 +50,7 @@ const Pergunta1: React.FC<TableProps> = ({ data }) => {
         </tbody>
       </table>
     </div>
+
   );
 };
 

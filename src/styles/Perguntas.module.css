@@ -1,33 +1,50 @@
 .grid {
     margin-top: 2vh;
-    width: 100%;
+    
     border-radius: 8px;
   }
   
+  .tablewrapper {
+    height: 600px;
+    border-radius: 8px;
+    overflow-y: scroll;
+    outline: auto;
+    
+  }
   
   .table {
     margin: 2vh;
     display: block;
+    flex: auto;
+    width: fit-content;
     overflow: hidden;
     table-layout: fixed;
     border-collapse: collapse;
     border-radius: 10px;
     white-space: nowrap;
-
-    overflow-y: scroll;
   }
-
   
   .tablethead {
     background-color: #222;
     color: white;
-    
   }
   
-  .tablettd , .tabletth{
-   text-align: center;
-   padding: 0.8rem;
+  .tablettd,
+  .tabletth {
+    text-align: center;
+    padding: 0.8rem;
   }
   
-  
+  .tablettd {
+    text-align: center;
+    padding: 0.8rem;
+    border-top: 0.5px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+  }
+
+  .expand {
+    width: 100%;
+  }
   

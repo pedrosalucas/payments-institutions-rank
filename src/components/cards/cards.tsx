@@ -54,7 +54,7 @@ export default function Cards () {
               Pergunta 4 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-              Existe alguma relação entre o tamanho do(a) [instituição/banco] (número de clientes, por exemplo) e o seu índice de reclamações?
+              Existe alguma relação entre o tamanho do(a) [instituição/banco] (número de clientes, por exemplo) e o seu índice de reclamações em determinado tempo?
             </p>
           </a>
 
@@ -106,7 +106,7 @@ export default function Cards () {
               Pergunta 8 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-            Qual empresa apresenta o maior número de reclamações reguladas procedentes e o menor número de reclamações não reguladas em determinado ano?
+            Quais as 10 empresas que apresentam o maior número de reclamações reguladas procedentes e o menor número de reclamações não reguladas em determinado ano?
             </p>
           </a>
           

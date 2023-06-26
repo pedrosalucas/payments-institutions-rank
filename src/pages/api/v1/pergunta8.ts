@@ -23,7 +23,7 @@ export default async function handler(
 		ORDER BY
 			qtd_reclamacoes_reguladas_procedentes DESC,
 			qtd_reclamacoes_nao_reguladas ASC
-		LIMIT 1;
+		LIMIT 10;
 	`;
 
 	switch (requestMethod) {

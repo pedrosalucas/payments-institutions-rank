@@ -18,7 +18,8 @@ export default async function handler(
 			tb_reclamacao_cliente_por_if
 		WHERE
 			qtd_clientes_ccs_scr IS NOT NULL
-			AND vl_indice IS NOT NULL;
+			AND vl_indice IS NOT NULL
+		LIMIT 50;
 	`;
 
 	switch (requestMethod) {
