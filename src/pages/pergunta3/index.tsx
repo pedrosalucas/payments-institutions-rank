@@ -61,8 +61,8 @@ export default function pergunta3 ( {initialData, bancos}: {initialData:tb_recla
 						})
 					}}/>
 					<div>
-						<h1>{data !== undefined? data[0].nm_instituicao_financeira : ""}</h1>
-						<h2>{data !== undefined? data[0].qtd_total_reclamacoes : ""} reclamações</h2>
+						<h1>  {data !== undefined? `O(a) ${data[0].nm_instituicao_financeira} tem:`: ""}</h1>
+						<h2>{data !== undefined? `${data[0].qtd_total_reclamacoes} reclamações` : ""} </h2>
 					</div>
 					
 				</main>
