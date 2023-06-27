@@ -11,24 +11,19 @@ export default async function handler(
 
 	//Consulta Pergunta 5 (sem filtragem)
 	const data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
-		WITH cte_anos AS (
-			SELECT DISTINCT ds_ano
+		WITH tb_reclamacoes_por_ano AS (
+			SELECT nm_instituicao_financeira, ds_ano, sum(REPLACE(REPLACE(vl_indice, ',', ''), '.', '')::numeric) total_indice
 			FROM tb_reclamacao_cliente_por_if
-			WHERE vl_indice IS NOT NULL
+			WHERE vl_indice IS NOT NULL AND (ds_ano = 2022 OR ds_ano = 2022 + 1)
+			GROUP BY nm_instituicao_financeira, ds_ano
 		)
 		SELECT
-				atual.nm_instituicao_financeira,
-				REPLACE(REPLACE(atual.vl_indice, ',', ''), '.', '')::numeric - REPLACE(REPLACE(anterior.vl_indice, ',', ''), '.', '')::numeric AS reducao_indice
+			atual.nm_instituicao_financeira,
+			(atual.total_indice - anterior.total_indice)::text AS vl_indice
 		FROM
-				tb_reclamacao_cliente_por_if atual
-				INNER JOIN tb_reclamacao_cliente_por_if anterior ON atual.nm_instituicao_financeira = anterior.nm_instituicao_financeira
-						AND atual.ds_ano = anterior.ds_ano + 1
-		WHERE
-				atual.ds_ano = 2022
-				AND atual.vl_indice IS NOT NULL
-				AND anterior.vl_indice IS NOT NULL
-		ORDER BY
-				reducao_indice DESC;
+			(SELECT * FROM tb_reclamacoes_por_ano WHERE ds_ano = 2022) atual
+			INNER JOIN (SELECT * FROM tb_reclamacoes_por_ano WHERE ds_ano = 2022 + 1) anterior ON atual.nm_instituicao_financeira = anterior.nm_instituicao_financeira
+		ORDER BY (atual.total_indice - anterior.total_indice) DESC;
 	`;
 
 	switch (requestMethod) {

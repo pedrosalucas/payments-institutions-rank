@@ -15,6 +15,9 @@ const Pergunta6: React.FC<TableProps> = ({ data }) => {
       <table className={styles.table}>
         <thead>
           <tr className={`${styles.tablethead} ${styles.tabletth}`}>
+						<th className={styles.tabletth}>Nome da instituição</th>
+						<th className={styles.tabletth}>Ano</th>
+						<th className={styles.tabletth}>Trimestre</th>
             <th className={styles.tabletth}>Quantidade de Clientes CCS/SCR</th>
             <th className={styles.tabletth}>Índice</th>
           </tr>
@@ -22,6 +25,9 @@ const Pergunta6: React.FC<TableProps> = ({ data }) => {
         <tbody className={styles.expand}>
           {data.map((item, index) => (
             <tr key={index} className={styles.tablettd}>
+              <td className={styles.tablettd}>{item.nm_instituicao_financeira}</td>
+              <td className={styles.tablettd}>{item.ds_ano}</td>
+              <td className={styles.tablettd}>{item.ds_trimestre}</td>
               <td className={styles.tablettd}>{item.qtd_clientes_ccs_scr}</td>
               <td className={styles.tablettd}>{item.vl_indice}</td>
             </tr>

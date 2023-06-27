@@ -41,7 +41,7 @@ export default function Cards () {
               Pergunta 3 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-              Quantas reclamações o(a) [instituição/banco] obteve em determinado período de tempo?
+              Quantas reclamações o(a) [instituição/banco] obteve em todo o período de tempo?
             </p>
           </a>
 
@@ -54,7 +54,7 @@ export default function Cards () {
               Pergunta 4 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-              Existe alguma relação entre o tamanho do(a) [instituição/banco] (número de clientes, por exemplo) e o seu índice de reclamações em determinado tempo?
+              Existe alguma relação entre o tamanho do(a) [instituição/banco] (número de clientes, por exemplo) e o seu índice de reclamações em determinado trimestre?
             </p>
           </a>
 
@@ -119,7 +119,7 @@ export default function Cards () {
               Pergunta 9 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-              Quais as 15 empresas com maior número de reclamações não reguladas em relação a quantidade de reclamações em determinado ano?
+              Quais as 10 empresas com maior número de reclamações não reguladas em relação a quantidade de reclamações em determinado ano?
             </p>
           </a>
 

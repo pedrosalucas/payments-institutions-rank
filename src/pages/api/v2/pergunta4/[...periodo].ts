@@ -7,16 +7,32 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<tb_reclamacao_cliente_por_if[]>
 ) {
+
 	const requestMethod = req.method;
+	const { periodo } = req.query
 
 	//Consulta Pergunta 4 (sem filtragem)
-	const data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
+	var data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
+	SELECT nm_instituicao_financeira, qtd_clientes_ccs_scr, ds_ano, ds_trimestre, vl_indice
+	FROM tb_reclamacao_cliente_por_if
+	WHERE qtd_clientes_ccs_scr IS NOT NULL 
+	ORDER BY qtd_clientes_ccs_scr DESC
+	LIMIT 50;
+`;
+	
+	//Consulta Pergunta 4 (com filtragem)
+	if(periodo !== undefined && periodo?.length > 0){
+		data = await prisma.$queryRaw`
 		SELECT nm_instituicao_financeira, qtd_clientes_ccs_scr, ds_ano, ds_trimestre, vl_indice
 		FROM tb_reclamacao_cliente_por_if
-		WHERE qtd_clientes_ccs_scr IS NOT NULL
+		WHERE qtd_clientes_ccs_scr IS NOT NULL 
+			AND ds_ano = ${periodo[0]}::integer 
+			AND ds_trimestre = ${periodo[1]} || 'º'  
 		ORDER BY qtd_clientes_ccs_scr DESC
 		LIMIT 50;
 	`;
+	}
+	
 
 	switch (requestMethod) {
 		case 'GET':

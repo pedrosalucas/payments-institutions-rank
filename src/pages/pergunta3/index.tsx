@@ -1,26 +1,42 @@
 import { Grid, Text } from "@geist-ui/core";
-import Pergunta1 from "@/components/perguntas/pergunta1/tabela";
 import styles from '@/styles/Perguntas.module.css'
 import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
-import { getResposta } from "@/services/perguntas_v1";
-import { useState } from "react";
+import { getResposta3 } from "@/services/perguntas_v2";
+import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import Pergunta2 from "@/components/perguntas/pergunta2/tabela";
+import Select from "react-select";
+import {populaBancos} from "@/services/populaBancos";
 
 
 export async function getStaticProps(){
-  const data = await getResposta(3);
+  //const data = await getResposta3();
+	const bancos = await populaBancos();
   return {
       props: {
-          initialData: data
+          //initialData: data,
+					bancos: bancos
       }
   }
 }
 
-export default function pergunta2 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
-  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
-  
+export default function pergunta3 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
+  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>();
+  const [options, setOptions] =  useState(bancos);
+	const [bancoSelected, setBancoSelected] = useState("");
 
+	const handleChange = ({value, label}: {value:string, label: string}) => {
+		setBancoSelected(value);
+	};
+
+	async function queryPergunta3(nm_banco:string) {
+		const data = await getResposta3(nm_banco);
+		 setData(data);
+	}
+
+	useEffect(() =>{
+		queryPergunta3(bancoSelected);
+	}, [bancoSelected, data])
+	
   return(
     <div className={styles.grid}>
       <Grid.Container gap={2} className={styles.grid}>
@@ -31,15 +47,25 @@ export default function pergunta2 ( {initialData}: {initialData:tb_reclamacao_cl
           
         </Grid>
       </Grid.Container>
-      <div >
-      <main className={styles.main}>
-        {data.map((c: any, i: number) => (
-					<div key={i}>
-            <h1>C6 BANK (conglomerado)</h1>
-						<h2>- {c.total_reclamacoes} reclamações</h2>
+      <div>
+				<main className={styles.main} style={{height: '90vh'}}>
+				<Select options={options} onChange={handleChange} styles={{
+						control: (baseStyles, state) => ({
+							...baseStyles,
+							color: 'black',
+							
+						}),
+						option: (baseStyles, state) => ({
+							...baseStyles,
+							color: 'black',
+						})
+					}}/>
+					<div>
+						<h1>{data !== undefined? data[0].nm_instituicao_financeira : ""}</h1>
+						<h2>{data !== undefined? data[0].qtd_total_reclamacoes : ""} reclamações</h2>
 					</div>
-				))}
-      </main>
+					
+				</main>
       </div>
       {/*<Pergunta1Chart data={data}/>*/}
       

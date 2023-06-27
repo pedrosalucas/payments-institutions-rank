@@ -8,12 +8,13 @@ export default async function handler(
   res: NextApiResponse<tb_reclamacao_cliente_por_if[]>
 ) {
 	const requestMethod = req.method;
+	const {nm_banco} = req.query;
 
-	//Consulta Pergunta 6 (sem filtragem)
+	//Consulta Pergunta 6 (com filtragem)
 	const data: tb_reclamacao_cliente_por_if[] = await prisma.$queryRaw`
 		SELECT
 			nm_instituicao_financeira, 
-			ds_ano, 
+			ds_ano,
 			ds_trimestre, 
 			qtd_clientes_ccs_scr,
 			vl_indice
@@ -22,6 +23,7 @@ export default async function handler(
 		WHERE
 			qtd_clientes_ccs_scr IS NOT NULL
 			AND vl_indice IS NOT NULL
+			AND nm_instituicao_financeira = ${nm_banco}
 		LIMIT 50;
 	`;
 
