@@ -4,7 +4,7 @@ import Select from "react-select";
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import styles from '@/styles/Perguntas.module.css'
-import Pergunta4 from "@/components/perguntas/pergunta4/tabela";
+import Pergunta4Table from "@/components/perguntas/pergunta4/tabela";
 import { getResposta4 } from "@/services/perguntas_v2";
 
 
@@ -18,7 +18,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta4 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
+export default function Pergunta4 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
   const [data, setData] = useState(initialData);
   const options = [];
 
@@ -71,9 +71,11 @@ export default function pergunta4 ( {initialData}: {initialData:tb_reclamacao_cl
             })
           }}
         />
+
         <Spacer y={1}/>
+
         <div className={styles.flexmid}>
-        <Pergunta4 data={data !== undefined ? data : null} />
+          <Pergunta4Table data={data !== undefined ? data : null} />
         </div>
       </div>
       </main>

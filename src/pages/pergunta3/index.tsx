@@ -1,6 +1,5 @@
 import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
-import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
 import { getResposta3 } from "@/services/perguntas_v2";
 import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
@@ -20,7 +19,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta3 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
+export default function Pergunta3 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
     const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>();
     const [options, setOptions] =  useState(bancos);
 	const [bancoSelected, setBancoSelected] = useState("");
@@ -50,39 +49,43 @@ export default function pergunta3 ( {initialData, bancos}: {initialData:tb_recla
         </Grid>
       </Grid.Container>
       <div>
-				<main >
-					<div className={styles.main} style={{height:"30vh"}}>
-						<Spacer y={1}/>
-						<Select options={options} onChange={handleChange} styles={{
-								control: (baseStyles, state) => ({
-									...baseStyles,
-									backgroundColor:'black',
-									color: 'white',
-								}),
-								input: (provided) => ({
-									...provided,
-									color:'white'
-								})
-								,
-								option: (baseStyles, state) => ({
-									...baseStyles,
-									color: 'white',
-									backgroundColor: 'black'
-								}),
-								singleValue: (provided) => ({
-									...provided,
-									color:'white'
-								})
-							}}/>
-							<div>
-							<Spacer y={1}/>
-								<h1>  {data !== undefined? `O ${data[0].nm_instituicao_financeira} tem o total de:`: ""}</h1>
-								<h2>{data !== undefined? `${data[0].qtd_total_reclamacoes} reclamações` : ""} </h2>
-							</div>
-						</div>
-				</main>
+		<main >
+			<div className={styles.main} style={{height:"30vh"}}>
+				<Spacer y={1}/>
+				<Select options={options} onChange={handleChange} styles={{
+						control: (baseStyles, state) => ({
+							...baseStyles,
+							backgroundColor:'black',
+							color: 'white',
+						}),
+						input: (provided) => ({
+							...provided,
+							color:'white'
+						})
+						,
+						option: (baseStyles, state) => ({
+							...baseStyles,
+							color: 'white',
+							backgroundColor: 'black'
+						}),
+						singleValue: (provided) => ({
+							...provided,
+							color:'white'
+						})
+					}}/>
+
+				<div>
+					<Spacer y={1}/>
+					<h1>
+						{data !== undefined? `O ${data[0].nm_instituicao_financeira} tem o total de:`: ""}
+					</h1>
+					<h2>
+						{data !== undefined? `${data[0].qtd_total_reclamacoes} reclamações` : ""}
+					</h2>
+				</div>
+			</div>
+		</main>
       </div>
-      {/*<Pergunta1Chart data={data}/>*/}
       
   </div>
   </main>

@@ -4,7 +4,7 @@ import styles from '@/styles/Perguntas.module.css'
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Select from "react-select";
 import {populaBancos} from "@/services/populaBancos";
-import Pergunta6 from "@/components/perguntas/pergunta6/tabela";
+import Pergunta6Table from "@/components/perguntas/pergunta6/tabela";
 import { useState, useEffect } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
 
@@ -19,7 +19,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta6 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
+export default function Pergunta6 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>();
   const [options, setOptions] =  useState(bancos);
 	const [bancoSelected, setBancoSelected] = useState("");
@@ -49,37 +49,39 @@ export default function pergunta6 ( {initialData, bancos}: {initialData:tb_recla
       </Grid.Container>
       <div >
       <main className={styles.expandprior}>
-					<div  className={styles.main} style={{height:"30vh"}}>
-						<Spacer y={1}/>
-						<Select options={options} onChange={handleChange} styles={{
-								control: (baseStyles, state) => ({
-									...baseStyles,
-									backgroundColor:'black',
-									color: 'white',
-								}),
-								input: (provided) => ({
-									...provided,
-									color:'white'
-								})
-								,
-								option: (baseStyles, state) => ({
-									...baseStyles,
-									color: 'white',
-									backgroundColor: 'black'
-								}),
-								singleValue: (provided) => ({
-									...provided,
-									color:'white'
-								})
-							}}/>
-							<div>
-							<Spacer y={1}/>
-							</div>
-              <div className={styles.flexmid}>
-              <Pergunta6 data={data !== undefined? data: null}/>
-              </div>
-						</div>
-				</main>
+		<div  className={styles.main} style={{height:"30vh"}}>
+			<Spacer y={1}/>
+			<Select options={options} onChange={handleChange} styles={{
+					control: (baseStyles, state) => ({
+						...baseStyles,
+						backgroundColor:'black',
+						color: 'white',
+					}),
+					input: (provided) => ({
+						...provided,
+						color:'white'
+					})
+					,
+					option: (baseStyles, state) => ({
+						...baseStyles,
+						color: 'white',
+						backgroundColor: 'black'
+					}),
+					singleValue: (provided) => ({
+						...provided,
+						color:'white'
+					})
+			}}/>
+			
+			<div>
+				<Spacer y={1}/>
+			</div>
+
+			<div className={styles.flexmid}>
+				<Pergunta6Table data={data !== undefined? data: null}/>
+			</div>
+		</div>
+	 </main>
       
       </div>
       {/*<Pergunta1Chart data={data}/>*/}

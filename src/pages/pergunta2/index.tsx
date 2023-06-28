@@ -1,11 +1,9 @@
 import { Grid, Text } from "@geist-ui/core";
-import Pergunta1 from "@/components/perguntas/pergunta1/tabela";
 import styles from '@/styles/Perguntas.module.css'
-import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
 import { getResposta } from "@/services/perguntas_v1";
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import Pergunta2 from "@/components/perguntas/pergunta2/tabela";
+import Pergunta2Table from "@/components/perguntas/pergunta2/tabela";
 
 
 export async function getStaticProps(){
@@ -17,7 +15,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta2 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
+export default function Pergunta2 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
   
 
@@ -31,12 +29,10 @@ export default function pergunta2 ( {initialData}: {initialData:tb_reclamacao_cl
           
         </Grid>
       </Grid.Container>
-      <div className={styles.flexleft}>
-      <Pergunta2 data={data}/>
-      </div>
-      {/*<Pergunta1Chart data={data}/>*/}
-      
-  </div>
 
+      <div className={styles.flexleft}>
+        <Pergunta2Table data={data}/>
+      </div>
+  </div>
   )
 }

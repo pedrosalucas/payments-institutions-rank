@@ -3,7 +3,7 @@ import styles from '@/styles/Perguntas.module.css'
 import { getResposta } from "@/services/perguntas_v1";
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import Pergunta7 from "@/components/perguntas/pergunta7/tabela";
+import Pergunta7Table from "@/components/perguntas/pergunta7/tabela";
 
 
 export async function getStaticProps(){
@@ -15,7 +15,7 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta6 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
+export default function Pergunta6 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
   
 
@@ -29,12 +29,10 @@ export default function pergunta6 ( {initialData}: {initialData:tb_reclamacao_cl
           
         </Grid>
       </Grid.Container>
-      <div >
-      <Pergunta7 data={data}/>
-      </div>
-      {/*<Pergunta1Chart data={data}/>*/}
       
-  </div>
-
+      <div>
+        <Pergunta7Table data={data}/>
+      </div>
+    </div>
   )
 }

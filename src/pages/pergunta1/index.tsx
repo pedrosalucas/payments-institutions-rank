@@ -1,5 +1,4 @@
 import { Grid, Text } from "@geist-ui/core";
-import Pergunta1 from "@/components/perguntas/pergunta1/tabela";
 import styles from '@/styles/Perguntas.module.css'
 import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
 import { getResposta } from "@/services/perguntas_v1";
@@ -17,29 +16,25 @@ export async function getStaticProps(){
   }
 }
 
-export default function pergunta1 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
+export default function Pergunta1 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
-  
 
   return(
     <div >
       <Grid.Container gap={2} >
         <Grid>
         <Text h1 style={{ letterSpacing: '0.6px' }}>
-          <Text span >Aqui estão as instituições financeiras com o maior índice de reclamações em cada período de referência</Text>
+          <Text span >
+            Aqui estão as instituições financeiras com o maior índice de reclamações em cada período de referência
+          </Text>
         </Text>
           
         </Grid>
       </Grid.Container>
       <Spacer y={1}/>
       <div className={styles.flexmid}>
-      {/* <Pergunta1 data={data}/> */}
-      <Pergunta1Chart data={data}/>
+        <Pergunta1Chart data={data}/>
       </div>
-      
-      
-      
-      
   </div>
 
   )

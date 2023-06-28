@@ -2,7 +2,7 @@ import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
 import { useState } from "react";
 import { tb_irregularidade_por_if } from "@prisma/client";
-import Pergunta9 from "@/components/perguntas/pergunta9/tabela";
+import Pergunta9Table from "@/components/perguntas/pergunta9/tabela";
 import { getResposta } from "@/services/perguntas_v1";
 import Select from "react-select";
 import { getResposta9 } from "@/services/perguntas_v2";
@@ -64,7 +64,7 @@ export default function Pergunta9Page({ initialData }: { initialData: tb_irregul
           />
           <Spacer y={2}/>
           <div className={styles.flexmid}>
-            <Pergunta9 data={data} />
+            <Pergunta9Table data={data} />
           </div>
         </div>
       </div>

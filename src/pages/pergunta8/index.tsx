@@ -2,7 +2,7 @@ import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import Pergunta8 from "@/components/perguntas/pergunta8/tabela";
+import Pergunta8Table from "@/components/perguntas/pergunta8/tabela";
 import { getResposta } from "@/services/perguntas_v1";
 import Select from "react-select";
 import { getResposta8 } from "@/services/perguntas_v2";
@@ -32,10 +32,12 @@ export default function Pergunta8Page({ initialData }: { initialData: tb_reclama
 
   return (
     <div>
-        <Text h1 style={{ letterSpacing: '0.6px' }}>
-          Selecione um ano...
-        </Text>
-        <Spacer y={1}/>
+      <Text h1 style={{ letterSpacing: '0.6px' }}>
+        Selecione um ano...
+      </Text>
+
+      <Spacer y={1}/>
+
       <div>
         <Select
           options={options}
@@ -61,9 +63,11 @@ export default function Pergunta8Page({ initialData }: { initialData: tb_reclama
             })
           }}
         />
+
         <Spacer y={2}/>
+
         <div className={styles.flexmid}>
-        <Pergunta8 data={data} />
+          <Pergunta8Table data={data} />
         </div>
       </div>
     </div>
