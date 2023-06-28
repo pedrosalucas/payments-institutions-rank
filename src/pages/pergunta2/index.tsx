@@ -6,7 +6,7 @@ import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta2Table from "@/components/perguntas/pergunta2/tabela";
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const data = await getResposta(2);
   return {
       props: {

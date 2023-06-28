@@ -7,7 +7,7 @@ import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import { Spacer } from '@nextui-org/react'
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const data = await getResposta(1);
   return {
       props: {

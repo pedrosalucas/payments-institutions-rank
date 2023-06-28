@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const bancos = await populaBancos();
 	return {
 	  props: {

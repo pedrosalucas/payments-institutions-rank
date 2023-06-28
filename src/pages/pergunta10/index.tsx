@@ -7,7 +7,7 @@ import Pergunta10Table from "@/components/perguntas/pergunta10/tabela";
 import { Spacer } from '@nextui-org/react'
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const data = await getResposta(10);
   return {
       props: {

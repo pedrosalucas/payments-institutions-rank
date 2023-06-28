@@ -9,7 +9,7 @@ import Select from "react-select";
 
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const bancos = await populaBancos();
 	return {
 	  props: {

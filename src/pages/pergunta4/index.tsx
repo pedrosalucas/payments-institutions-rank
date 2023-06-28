@@ -9,7 +9,7 @@ import { getResposta4 } from "@/services/perguntas_v2";
 
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const data = await getResposta4(2017, 1); // Carrega os dados iniciais
   return {
       props: {

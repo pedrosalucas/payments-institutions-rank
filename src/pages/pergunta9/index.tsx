@@ -8,7 +8,7 @@ import Select from "react-select";
 import { getResposta9 } from "@/services/perguntas_v2";
 import { Spacer } from "@nextui-org/react";
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const data = await getResposta(9); // Carrega os dados iniciais
   return {
       props: {
