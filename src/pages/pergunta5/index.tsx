@@ -1,24 +1,22 @@
 import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
 import { getResposta } from "@/services/perguntas_v1";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta5Table from "@/components/perguntas/pergunta5/tabela";
 
+export default function Pergunta5 () {
+  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>([]);
 
-export async function getServerSideProps(){
-  const data = await getResposta(5);
-  return {
-      props: {
-          initialData: data
-      }
-  }
-}
+  useEffect(() => {
+    async function respostaPergunta5() {
+      const response = await getResposta(5);
+      setData(response)
+    }
 
-export default function Pergunta5 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
-  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
+    respostaPergunta5();
+  }, []);
   
-
   return(
     <div className={styles.grid}>
       <Grid.Container gap={2} className={styles.grid}>

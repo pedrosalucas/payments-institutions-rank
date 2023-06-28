@@ -7,19 +7,8 @@ import styles from '@/styles/Perguntas.module.css'
 import Pergunta4Table from "@/components/perguntas/pergunta4/tabela";
 import { getResposta4 } from "@/services/perguntas_v2";
 
-
-
-export async function getServerSideProps(){
-  const data = await getResposta4(2017, 1); // Carrega os dados iniciais
-  return {
-      props: {
-          initialData: data
-      }
-  }
-}
-
-export default function Pergunta4 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
-  const [data, setData] = useState(initialData);
+export default function Pergunta4 () {
+  const [data, setData] = useState([]);
   const options = [];
 
   for (let ano = 2017; ano <= 2023; ano++) {
@@ -46,38 +35,38 @@ export default function Pergunta4 ( {initialData}: {initialData:tb_reclamacao_cl
       
       <Spacer y={0.5}/>
       <main className={styles.expandprior}>
-      <div className={styles.main} style={{ height: "30vh" }}>
-        <Select
-          options={options}
-          onChange={handleChange}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'black',
-              color: 'white',
-            }),
-            input: (provided) => ({
-              ...provided,
-              color: 'white'
-            }),
-            option: (baseStyles, state) => ({
-              ...baseStyles,
-              color: 'white',
-              backgroundColor: 'black'
-            }),
-            singleValue: (provided) => ({
-              ...provided,
-              color: 'white'
-            })
-          }}
-        />
+        <div className={styles.main} style={{ height: "30vh" }}>
+          <Select
+            options={options}
+            onChange={handleChange}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: 'black',
+                color: 'white',
+              }),
+              input: (provided) => ({
+                ...provided,
+                color: 'white'
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                color: 'white',
+                backgroundColor: 'black'
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                color: 'white'
+              })
+            }}
+          />
 
-        <Spacer y={1}/>
+          <Spacer y={1}/>
 
-        <div className={styles.flexmid}>
-          <Pergunta4Table data={data !== undefined ? data : null} />
+          <div className={styles.flexmid}>
+            <Pergunta4Table data={data !== undefined ? data : null} />
+          </div>
         </div>
-      </div>
       </main>
     </div>
   )
