@@ -22,7 +22,6 @@ export default function Pergunta1 () {
   useEffect(() => {
     async function respostaPergunta1() {
       const response = await getResposta(1);
-
       setData(response)
     }
 
