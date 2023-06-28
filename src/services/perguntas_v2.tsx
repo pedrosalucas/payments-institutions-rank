@@ -1,4 +1,4 @@
-const URL_PATH = (process.env.NODE_ENV !== 'production') ? 'http://localhost:3000' : 'http://www.pir.vercel.app';
+const URL_PATH = (process.env.NODE_ENV !== 'production') ? 'http://localhost:3000' : 'http://www.payments-institutions-rank.vercel.app';
 
 export async function getResposta3(nm_banco:string){
 	const response = await fetch(`${URL_PATH}/api/v2/pergunta3/${nm_banco}`);
