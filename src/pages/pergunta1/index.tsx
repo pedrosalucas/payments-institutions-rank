@@ -2,22 +2,32 @@ import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
 import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
 import { getResposta } from "@/services/perguntas_v1";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import { Spacer } from '@nextui-org/react'
 
 
-export async function getServerSideProps(){
-  const data = await getResposta(1);
-  return {
-      props: {
-          initialData: data
-      }
-  }
-}
+// export async function getServerSideProps(){
+//   const data = await getResposta(1);
+//   return {
+//       props: {
+//           initialData: data
+//       }
+//   }
+// }
 
-export default function Pergunta1 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
-  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
+export default function Pergunta1 () {
+  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>([]);
+
+  useEffect(() => {
+    async function respostaPergunta1() {
+      const response = await getResposta(1);
+
+      setData(response)
+    }
+
+    respostaPergunta1();
+  }, []);
 
   return(
     <div >
