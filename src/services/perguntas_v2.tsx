@@ -1,4 +1,4 @@
-const URL_PATH = (process.env.NODE_ENV !== 'production') ? 'http://localhost:3000' : 'http://www.payments-institutions-rank.vercel.app';
+const URL_PATH = (process.env.NODE_ENV !== 'production') ? 'http://localhost:3000' : 'https://payments-institutions-rank.vercel.app';
 
 export async function getResposta3(nm_banco:string){
 	const response = await fetch(`${URL_PATH}/api/v2/pergunta3/${nm_banco}`);
@@ -7,7 +7,7 @@ export async function getResposta3(nm_banco:string){
 }
 
 export async function getResposta4(ano:number, trimestre:number){
-	const response = await fetch(`${URL_PATH}/api/v2/pergunta4/${ano + '/'}${trimestre}`);
+	const response = await fetch(`${URL_PATH}/api/v2/pergunta4/${ano}/${trimestre}`);
 	const data = await response.json();
 	return data;
 }
