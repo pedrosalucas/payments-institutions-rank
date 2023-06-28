@@ -8,7 +8,7 @@ import Pergunta4Table from "@/components/perguntas/pergunta4/tabela";
 import { getResposta4 } from "@/services/perguntas_v2";
 
 export default function Pergunta4 () {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const options = [];
 
   for (let ano = 2017; ano <= 2023; ano++) {

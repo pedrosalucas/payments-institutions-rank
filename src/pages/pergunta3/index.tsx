@@ -2,13 +2,13 @@ import { Grid, Text } from "@geist-ui/core";
 import { getResposta3 } from "@/services/perguntas_v2";
 import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import {populaBancos} from "@/services/populaBancos";
+import { populaBancos } from "@/services/populaBancos";
 import { Spacer } from "@nextui-org/react";
 import styles from '@/styles/Perguntas.module.css'
 import Select from "react-select";
   
 export default function Pergunta3() {
-	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>();
+	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
 	const [options, setOptions] = useState([]);
 	const [bancoSelected, setBancoSelected] = useState("");
 
