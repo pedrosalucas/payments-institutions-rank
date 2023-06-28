@@ -25,7 +25,7 @@ export default function Pergunta8Page({ initialData }: { initialData: tb_reclama
     options.push({ value: ano, label: String(ano) });
   }
 
-  const handleChange = async (opcaoSelecionada) => {
+  const handleChange = async (opcaoSelecionada: any) => {
     const newData = await getResposta8(opcaoSelecionada.value);
     setData(newData);
   };

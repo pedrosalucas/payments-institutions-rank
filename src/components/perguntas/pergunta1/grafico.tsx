@@ -53,8 +53,8 @@ const Pergunta1Chart: React.FC<BarChartProps> = ({ data }) => {
         .attr('class', 'bar')
         .attr('x', (d) => x(d.nm_instituicao_financeira.replace(/\(.*\)/, '').replace(/- CR[EÉÊÈ]DITO[,]* FINANCIAMENTO E INVESTIMENTO/, '').replace(/- BANCO M[UÚÙ]LTIPLO/, '').trim()) || 0)
         .attr('width', x.bandwidth())
-        .attr('height', function(d) { return height - y(0); })
-        .attr("y", function(d) { return y(0); })
+        .attr("y", function(d) { return y(formatVlIndice(d.vl_indice)); })
+        .attr("height", function(d) { return height - y(formatVlIndice(d.vl_indice)); })
         .attr('fill', 'white');
 
       g.selectAll('.bar-label')
@@ -72,13 +72,15 @@ const Pergunta1Chart: React.FC<BarChartProps> = ({ data }) => {
         .style("text-anchor", "end")
         .style("font-size", "14px");
 
+      /*
       svg.selectAll("rect")
         .transition()
         .duration(800)
         .attr("y", function(d) { return y(formatVlIndice(d.vl_indice)); })
         .attr("height", function(d) { return height - y(formatVlIndice(d.vl_indice)); })
         .delay(function(d,i){console.log(i); return (i * 100); });
-
+      */
+     
       g.append('g').attr('class', 'axis').call(d3.axisLeft(y));
     }
   }, [data]);

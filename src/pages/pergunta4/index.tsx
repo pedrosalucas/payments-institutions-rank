@@ -32,7 +32,7 @@ export default function Pergunta4 ( {initialData}: {initialData:tb_reclamacao_cl
     }
   }
 
-  const handleChange = async (opcaoSelecionada) => {
+  const handleChange = async (opcaoSelecionada: any) => {
     const [ano, trimestre] = opcaoSelecionada.value.split('.');
     const newData = await getResposta4(parseInt(ano), parseInt(trimestre));
     setData(newData);

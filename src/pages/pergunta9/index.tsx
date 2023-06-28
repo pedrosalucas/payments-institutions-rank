@@ -25,7 +25,7 @@ export default function Pergunta9Page({ initialData }: { initialData: tb_irregul
     options.push({ value: ano, label: String(ano) });
   }
 
-  const handleChange = async (opcaoSelecionada) => {
+  const handleChange = async (opcaoSelecionada : any) => {
     const newData = await getResposta9(opcaoSelecionada.value);
     setData(newData);
   };
