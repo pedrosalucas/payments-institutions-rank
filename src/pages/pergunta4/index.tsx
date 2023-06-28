@@ -1,16 +1,16 @@
-import { Grid, Text } from "@geist-ui/core";
-import Pergunta1 from "@/components/perguntas/pergunta1/tabela";
-import styles from '@/styles/Perguntas.module.css'
-import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
-import { getResposta } from "@/services/perguntas_v1";
+import { Text } from "@geist-ui/core";
+import { Spacer } from '@nextui-org/react'
+import Select from "react-select";
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-
+import styles from '@/styles/Perguntas.module.css'
 import Pergunta4 from "@/components/perguntas/pergunta4/tabela";
+import { getResposta4 } from "@/services/perguntas_v2";
+
 
 
 export async function getStaticProps(){
-  const data = await getResposta(4);
+  const data = await getResposta4(2017, 1); // Carrega os dados iniciais
   return {
       props: {
           initialData: data
@@ -19,25 +19,64 @@ export async function getStaticProps(){
 }
 
 export default function pergunta4 ( {initialData}: {initialData:tb_reclamacao_cliente_por_if[]} ) {
-  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>(initialData);
-  
+  const [data, setData] = useState(initialData);
+  const options = [];
 
-  return(
-    <div className={styles.grid}>
-      <Grid.Container gap={2} className={styles.grid}>
-        <Grid>
-        <Text margin="2vh" h1 style={{ letterSpacing: '0.6px' }}>
-          <Text span >Resultados</Text>
-        </Text>
-          
-        </Grid>
-      </Grid.Container>
-      <div >
-      <Pergunta4 data={data}/>
-      </div>
-      {/*<Pergunta1Chart data={data}/>*/}
+  for (let ano = 2017; ano <= 2023; ano++) {
+    for (let trimestre = 1; trimestre <= 4; trimestre++) {
+      const opcao = {
+        value: `${ano}.${trimestre}`,
+        label: `${ano}.${trimestre}`
+      };
+      options.push(opcao);
+    }
+  }
+
+  const handleChange = async (opcaoSelecionada) => {
+    const [ano, trimestre] = opcaoSelecionada.value.split('.');
+    const newData = await getResposta4(parseInt(ano), parseInt(trimestre));
+    setData(newData);
+  };
+
+  return (
+    <div>
+      <Text h1 style={{ letterSpacing: '0.6px' }}>
+        Selecione o trimestre
+      </Text>
       
-  </div>
-
+      <Spacer y={0.5}/>
+      <main className={styles.expandprior}>
+      <div className={styles.main} style={{ height: "30vh" }}>
+        <Select
+          options={options}
+          onChange={handleChange}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: 'black',
+              color: 'white',
+            }),
+            input: (provided) => ({
+              ...provided,
+              color: 'white'
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              color: 'white',
+              backgroundColor: 'black'
+            }),
+            singleValue: (provided) => ({
+              ...provided,
+              color: 'white'
+            })
+          }}
+        />
+        <Spacer y={1}/>
+        <div className={styles.flexmid}>
+        <Pergunta4 data={data !== undefined ? data : null} />
+        </div>
+      </div>
+      </main>
+    </div>
   )
 }

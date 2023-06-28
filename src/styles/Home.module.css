@@ -12,6 +12,9 @@
   display: flex;
   align-items: center;
   padding: 2vh 10vh;
+  top: 0px;
+  right: 0px; 
+  left: 0px;
 }
 
 .container {

@@ -31,7 +31,7 @@ export default function pergunta2 ( {initialData}: {initialData:tb_reclamacao_cl
           
         </Grid>
       </Grid.Container>
-      <div >
+      <div className={styles.flexleft}>
       <Pergunta2 data={data}/>
       </div>
       {/*<Pergunta1Chart data={data}/>*/}

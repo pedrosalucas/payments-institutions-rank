@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Select from "react-select";
 import {populaBancos} from "@/services/populaBancos";
+import { Spacer } from "@nextui-org/react";
 
 
 export async function getStaticProps(){
@@ -20,8 +21,8 @@ export async function getStaticProps(){
 }
 
 export default function pergunta3 ( {initialData, bancos}: {initialData:tb_reclamacao_cliente_por_if[], bancos:any} ) {
-  const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>();
-  const [options, setOptions] =  useState(bancos);
+    const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>();
+    const [options, setOptions] =  useState(bancos);
 	const [bancoSelected, setBancoSelected] = useState("");
 
 	const handleChange = ({value, label}: {value:string, label: string}) => {
@@ -38,38 +39,52 @@ export default function pergunta3 ( {initialData, bancos}: {initialData:tb_recla
 	}, [bancoSelected, data])
 	
   return(
-    <div className={styles.grid}>
-      <Grid.Container gap={2} className={styles.grid}>
+	<main className={styles.wrapper}>
+    <div>
+      <Grid.Container gap={2} >
         <Grid>
-        <Text margin="2vh" h1 style={{ letterSpacing: '0.6px' }}>
-          <Text span >Resultados</Text>
+        <Text  h1 style={{ letterSpacing: '0.6px' }}>
+          <Text span >Selecione um banco...</Text>
         </Text>
           
         </Grid>
       </Grid.Container>
       <div>
-				<main className={styles.main} style={{height: '90vh'}}>
-				<Select options={options} onChange={handleChange} styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							color: 'black',
-							
-						}),
-						option: (baseStyles, state) => ({
-							...baseStyles,
-							color: 'black',
-						})
-					}}/>
-					<div>
-						<h1>  {data !== undefined? `O(a) ${data[0].nm_instituicao_financeira} tem:`: ""}</h1>
-						<h2>{data !== undefined? `${data[0].qtd_total_reclamacoes} reclamações` : ""} </h2>
-					</div>
-					
+				<main >
+					<div className={styles.main} style={{height:"30vh"}}>
+						<Spacer y={1}/>
+						<Select options={options} onChange={handleChange} styles={{
+								control: (baseStyles, state) => ({
+									...baseStyles,
+									backgroundColor:'black',
+									color: 'white',
+								}),
+								input: (provided) => ({
+									...provided,
+									color:'white'
+								})
+								,
+								option: (baseStyles, state) => ({
+									...baseStyles,
+									color: 'white',
+									backgroundColor: 'black'
+								}),
+								singleValue: (provided) => ({
+									...provided,
+									color:'white'
+								})
+							}}/>
+							<div>
+							<Spacer y={1}/>
+								<h1>  {data !== undefined? `O ${data[0].nm_instituicao_financeira} tem o total de:`: ""}</h1>
+								<h2>{data !== undefined? `${data[0].qtd_total_reclamacoes} reclamações` : ""} </h2>
+							</div>
+						</div>
 				</main>
       </div>
       {/*<Pergunta1Chart data={data}/>*/}
       
   </div>
-
+  </main>
   )
 }

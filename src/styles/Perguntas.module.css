@@ -3,6 +3,24 @@
     
     border-radius: 8px;
   }
+
+  .flexmid {
+    display:flex;
+    justify-content: center;
+  }
+
+  .flexleft {
+    display: flex;
+    justify-content: left;
+  }
+
+  .expandprior {
+    height: 70vh;
+  }
+
+  .wrapper {
+    width: 1200px;
+  }
   
   .tablewrapper {
     height: 600px;

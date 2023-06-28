@@ -4,6 +4,7 @@ import { getResposta } from "@/services/perguntas_v1";
 import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta10 from "@/components/perguntas/pergunta10/tabela";
+import { Spacer } from '@nextui-org/react'
 
 
 export async function getStaticProps(){
@@ -20,16 +21,14 @@ export default function pergunta6 ( {initialData}: {initialData:tb_reclamacao_cl
   
 
   return(
-    <div className={styles.grid}>
-      <Grid.Container gap={2} className={styles.grid}>
-        <Grid>
-        <Text margin="2vh" h1 style={{ letterSpacing: '0.6px' }}>
-          <Text span >Resultados</Text>
+    <div>
+        <div className={styles.flexmid}>
+        <Text h1 style={{ letterSpacing: '0.6px' }}>
+          Resultados
         </Text>
-          
-        </Grid>
-      </Grid.Container>
-      <div >
+        </div>
+        <Spacer y={0.5}/>
+      <div className={styles.flexmid}>
       <Pergunta10 data={data}/>
       </div>
       {/*<Pergunta1Chart data={data}/>*/}

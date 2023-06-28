@@ -9,10 +9,14 @@ import { tb_reclamacao_cliente_por_if} from "@prisma/client";
   vl_indice: string;
 }*/
 interface TableProps {
-  data: tb_reclamacao_cliente_por_if[];
+  data: tb_reclamacao_cliente_por_if[] | null | undefined;
 }
 
 const Pergunta4: React.FC<TableProps> = ({ data }) => {
+  if (!data) {
+    return null; // ou exiba uma mensagem de carregamento ou um estado vazio, conforme necessário
+  }
+
   const formatVlIndice = (value: string | null) => {
     if (value === null){
       return 0;
@@ -32,20 +36,20 @@ const Pergunta4: React.FC<TableProps> = ({ data }) => {
       <table className={styles.table}>
         <thead>
           <tr className={`${styles.tablethead} ${styles.tabletth}`}>
-            <th className={styles.tabletth}>Instituição Financeira/Banco</th>
-            <th className={styles.tabletth}>Quantidade de Clientes CCS/SCR</th>
             <th className={styles.tabletth}>Ano</th>
             <th className={styles.tabletth}>Trimestre</th>
+            <th className={styles.tabletth}>Instituição Financeira/Banco</th>
+            <th className={styles.tabletth}>Quantidade de Clientes CCS/SCR</th>
             <th className={styles.tabletth}>Índice</th>
           </tr>
         </thead>
         <tbody className={styles.expand}>
           {sortedData.map((item, index) => (
             <tr key={index} className={styles.tablettd}>
-              <td className={styles.tablettd}>{item.nm_instituicao_financeira}</td>
-              <td className={styles.tablettd}>{item.qtd_clientes_ccs_scr}</td>
               <td className={styles.tablettd}>{item.ds_ano}</td>
               <td className={styles.tablettd}>{item.ds_trimestre}</td>
+              <td className={styles.tablettd}>{item.nm_instituicao_financeira}</td>
+              <td className={styles.tablettd}>{item.qtd_clientes_ccs_scr}</td>
               <td className={styles.tablettd}>{formatVlIndice(item.vl_indice)}</td>
             </tr>
           ))}
