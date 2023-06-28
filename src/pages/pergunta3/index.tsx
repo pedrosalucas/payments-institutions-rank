@@ -35,7 +35,8 @@ export default function Pergunta3() {
 			setData(data);
 		}
 
-		queryPergunta3(bancoSelected);
+		if (bancoSelected !== "")
+			queryPergunta3(bancoSelected) ;
 	}, [bancoSelected]);
 
 	return (
@@ -56,24 +57,16 @@ export default function Pergunta3() {
 							options={options}
 							onChange={handleChange}
 							styles={{
-							control: (baseStyles, state) => ({
-								...baseStyles,
-								backgroundColor: 'black',
-								color: 'white',
-							}),
-							input: (provided) => ({
-								...provided,
-								color: 'white'
-							}),
-							option: (baseStyles, state) => ({
-								...baseStyles,
-								color: 'white',
-								backgroundColor: 'black'
-							}),
-							singleValue: (provided) => ({
-								...provided,
-								color: 'white'
-							})
+								control: (baseStyles, state) => ({
+									...baseStyles, backgroundColor: 'black',
+									color: 'white',
+								}),
+								input: (provided) => ({ ...provided, color: 'white' }),
+								option: (baseStyles, state) => ({
+									...baseStyles, color: 'white',
+									backgroundColor: 'black'
+								}),
+								singleValue: (provided) => ({ ...provided, color: 'white' })
 							}}
 						/>
 
