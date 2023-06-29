@@ -6,20 +6,29 @@ import { populaBancos } from "@/services/populaBancos";
 import { Spacer } from "@nextui-org/react";
 import styles from '@/styles/Perguntas.module.css'
 import Select from "react-select";
+
+export async function getServerSideProps() {
+	const bancos = await populaBancos();
+	return {
+	  props: {
+		bancos: bancos
+	  }
+	}
+  }
   
-export default function Pergunta3() {
+  export default function Pergunta3({ bancos }: { bancos: any }) {
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
-	const [options, setOptions] = useState([]);
+	const [options, setOptions] = useState(bancos);
 	const [bancoSelected, setBancoSelected] = useState("");
 
-	useEffect(() => {
-		async function bancosPossiveis() {
-			const bancos: any = await populaBancos();
-			setOptions(bancos);
-		}
+	// useEffect(() => {
+	// 	async function bancosPossiveis() {
+	// 		const bancos: any = await populaBancos();
+	// 		setOptions(bancos);
+	// 	}
 
-		bancosPossiveis();
-	}, []);
+	// 	bancosPossiveis();
+	// }, []);
 
 	useEffect(() => {
 		async function queryPergunta3(nm_banco: string) {
