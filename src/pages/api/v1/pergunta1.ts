@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
 import {tb_reclamacao_cliente_por_if} from "@prisma/client"; //data type
 import { prisma } from '@/db'; //Prisma global instance
 

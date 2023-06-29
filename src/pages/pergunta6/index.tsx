@@ -3,14 +3,14 @@ import { Spacer } from "@nextui-org/react"
 import styles from '@/styles/Perguntas.module.css'
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Select from "react-select";
-import {populaBancos} from "@/services/populaBancos";
+import { getBancos } from "@/services/getBancos";
 import Pergunta6Table from "@/components/perguntas/pergunta6/tabela";
 import { useState, useEffect } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
 
 
 export async function getServerSideProps() {
-	const bancos = await populaBancos();
+	const bancos = await getBancos();
 	return {
 	  props: {
 		//initialData: data,

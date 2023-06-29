@@ -2,33 +2,33 @@ import { Grid, Text } from "@geist-ui/core";
 import { getResposta3 } from "@/services/perguntas_v2";
 import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import { populaBancos } from "@/services/populaBancos";
+import { getBancos } from "@/services/getBancos";
 import { Spacer } from "@nextui-org/react";
 import styles from '@/styles/Perguntas.module.css'
 import Select from "react-select";
 
-export async function getServerSideProps() {
-	const bancos = await populaBancos();
-	return {
-	  props: {
-		bancos: bancos
-	  }
-	}
-  }
+// export async function getServerSideProps() {
+// 	const bancos = await populaBancos();
+// 	return {
+// 	  props: {
+// 		bancos: bancos
+// 	  }
+// 	}
+//   }
   
   export default function Pergunta3({ bancos }: { bancos: any }) {
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
 	const [options, setOptions] = useState(bancos);
 	const [bancoSelected, setBancoSelected] = useState("");
 
-	// useEffect(() => {
-	// 	async function bancosPossiveis() {
-	// 		const bancos: any = await populaBancos();
-	// 		setOptions(bancos);
-	// 	}
+	useEffect(() => {
+		async function populaBancos() {
+			const bancos: any = await getBancos();
+			setOptions(bancos);
+		}
 
-	// 	bancosPossiveis();
-	// }, []);
+		populaBancos();
+	}, []);
 
 	useEffect(() => {
 		async function queryPergunta3(nm_banco: string) {
@@ -95,12 +95,8 @@ export async function getServerSideProps() {
 
 						<div>
 							<Spacer y={1} />
-							<h1>
-								{(data !== undefined && data.length !== 0) ? `${data[0].qtd_total_reclamacoes} reclamações`: "" }
-							</h1>
-							<h2>
-								{(data !== undefined && data.length !== 0) ? `${data[0].qtd_total_reclamacoes} reclamações` : "" }
-							</h2>
+							<h1>{inst_name()}</h1>
+							<h2>{complaint_amount()}</h2>
 						</div>
 						</div>
 					</main>
