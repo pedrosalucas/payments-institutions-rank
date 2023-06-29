@@ -8,8 +8,8 @@ import {Spacer} from "@nextui-org/react"
 import { getResposta as getRespostaV1 } from "@/services/perguntas_v1";
 import { getResposta8 as getRespostaV2 } from "@/services/perguntas_v2";
 
-export default function Pergunta8Page({ initialData }: { initialData: tb_reclamacao_cliente_por_if[] }) {
-  const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>(initialData);
+export default function Pergunta8Page() {
+  const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const options = [];
 
   for (let ano = 2017; ano <= 2023; ano++) {
