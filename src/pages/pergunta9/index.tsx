@@ -1,6 +1,6 @@
 import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tb_irregularidade_por_if } from "@prisma/client";
 import Pergunta9Table from "@/components/perguntas/pergunta9/tabela";
 import { getResposta } from "@/services/perguntas_v1";
@@ -8,22 +8,22 @@ import Select from "react-select";
 import { getResposta9 } from "@/services/perguntas_v2";
 import { Spacer } from "@nextui-org/react";
 
-export async function getServerSideProps(){
-  const data = await getResposta(9); // Carrega os dados iniciais
-  return {
-      props: {
-          initialData: data
-      }
-  }
-}
-
-export default function Pergunta9Page({ initialData }: { initialData: tb_irregularidade_por_if[] }) {
-  const [data, setData] = useState<tb_irregularidade_por_if[]>(initialData);
+export default function Pergunta9Page() {
+  const [data, setData] = useState<tb_irregularidade_por_if[]>([]);
   const options = [];
 
   for (let ano = 2017; ano <= 2023; ano++) {
     options.push({ value: ano, label: String(ano) });
   }
+
+  useEffect(() => {
+    async function respostaPergunta9() {
+      const response = await getResposta(9);
+      setData(response);
+    }
+
+    respostaPergunta9();
+  }, []);
 
   const handleChange = async (opcaoSelecionada : any) => {
     const newData = await getResposta9(opcaoSelecionada.value);
@@ -43,23 +43,15 @@ export default function Pergunta9Page({ initialData }: { initialData: tb_irregul
             onChange={handleChange}
             styles={{
               control: (baseStyles, state) => ({
-                ...baseStyles,
-                backgroundColor: 'black',
+                ...baseStyles, backgroundColor: 'black',
                 color: 'white',
               }),
-              input: (provided) => ({
-                ...provided,
-                color: 'white'
-              }),
+              input: (provided) => ({ ...provided, color: 'white' }),
               option: (baseStyles, state) => ({
-                ...baseStyles,
-                color: 'white',
+                ...baseStyles, color: 'white',
                 backgroundColor: 'black'
               }),
-              singleValue: (provided) => ({
-                ...provided,
-                color: 'white'
-              })
+              singleValue: (provided) => ({ ...provided, color: 'white' })
             }}
           />
           <Spacer y={2}/>

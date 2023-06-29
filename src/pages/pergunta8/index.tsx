@@ -1,21 +1,12 @@
 import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta8Table from "@/components/perguntas/pergunta8/tabela";
-import { getResposta } from "@/services/perguntas_v1";
 import Select from "react-select";
-import { getResposta8 } from "@/services/perguntas_v2";
 import {Spacer} from "@nextui-org/react"
-
-export async function getServerSideProps(){
-  const data = await getResposta(8); // Carrega os dados iniciais
-  return {
-      props: {
-          initialData: data
-      }
-  }
-}
+import { getResposta as getRespostaV1 } from "@/services/perguntas_v1";
+import { getResposta8 as getRespostaV2 } from "@/services/perguntas_v2";
 
 export default function Pergunta8Page({ initialData }: { initialData: tb_reclamacao_cliente_por_if[] }) {
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>(initialData);
@@ -25,8 +16,17 @@ export default function Pergunta8Page({ initialData }: { initialData: tb_reclama
     options.push({ value: ano, label: String(ano) });
   }
 
+  useEffect(() => {
+    async function respostaPergunta8() {
+      const response = await getRespostaV1(8);
+      setData(response);
+    }
+
+    respostaPergunta8();
+  }, []);
+
   const handleChange = async (opcaoSelecionada: any) => {
-    const newData = await getResposta8(opcaoSelecionada.value);
+    const newData = await getRespostaV2(opcaoSelecionada.value);
     setData(newData);
   };
 
@@ -44,23 +44,15 @@ export default function Pergunta8Page({ initialData }: { initialData: tb_reclama
           onChange={handleChange}
           styles={{
             control: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'black',
+              ...baseStyles, backgroundColor: 'black',
               color: 'white',
             }),
-            input: (provided) => ({
-              ...provided,
-              color: 'white'
-            }),
+            input: (provided) => ({ ...provided, color: 'white' }),
             option: (baseStyles, state) => ({
-              ...baseStyles,
-              color: 'white',
+              ...baseStyles, color: 'white',
               backgroundColor: 'black'
             }),
-            singleValue: (provided) => ({
-              ...provided,
-              color: 'white'
-            })
+            singleValue: (provided) => ({ ...provided, color: 'white' })
           }}
         />
 
