@@ -7,18 +7,9 @@ import { Spacer } from "@nextui-org/react";
 import styles from '@/styles/Perguntas.module.css'
 import Select from "react-select";
 
-// export async function getServerSideProps() {
-// 	const bancos = await populaBancos();
-// 	return {
-// 	  props: {
-// 		bancos: bancos
-// 	  }
-// 	}
-//   }
-  
-  export default function Pergunta3({ bancos }: { bancos: any }) {
+  export default function Pergunta3() {
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
-	const [options, setOptions] = useState(bancos);
+	const [options, setOptions] = useState([]);
 	const [bancoSelected, setBancoSelected] = useState("");
 
 	useEffect(() => {
@@ -50,7 +41,7 @@ import Select from "react-select";
 
 	const inst_name = () => {
 		if (data !== undefined && data.length !== 0) 
-			return `O ${data[0].nm_instituicao_financeira} tem o total de:`
+			return `O(a) ${data[0].nm_instituicao_financeira} tem o total de:`
 		
 		return "";
 	}

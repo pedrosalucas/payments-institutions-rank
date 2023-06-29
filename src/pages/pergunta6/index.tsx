@@ -7,28 +7,20 @@ import { getBancos } from "@/services/getBancos";
 import Pergunta6Table from "@/components/perguntas/pergunta6/tabela";
 import { useState, useEffect } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
-
-
-export async function getServerSideProps() {
-	const bancos = await getBancos();
-	return {
-	  props: {
-		//initialData: data,
-		bancos: bancos,
-	  },
-	};
-  }
   
-  export default function Pergunta6({
-	initialData,
-	bancos,
-  }: {
-	initialData: tb_reclamacao_cliente_por_if[];
-	bancos: any;
-  }) {
+  export default function Pergunta6() {
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>();
-	const [options, setOptions] = useState(bancos);
+	const [options, setOptions] = useState([]);
 	const [bancoSelected, setBancoSelected] = useState("");
+
+	useEffect(() => {
+		async function populaBancos() {
+			const bancos: any = await getBancos();
+			setOptions(bancos);
+		}
+
+		populaBancos();
+	}, []);
   
 	const handleChange = (newValue: any | null) => {
 	  if (newValue !== null) {
@@ -89,7 +81,7 @@ export async function getServerSideProps() {
 			  </div>
   
 			  <div className={styles.flexmid}>
-				<Pergunta6Table data={data !== undefined ? data : null} />
+				<Pergunta6Table data={data?.length !== 0 ? data : null} />
 			  </div>
 			</div>
 		  </main>
