@@ -1,11 +1,11 @@
 import { Grid, Text,} from "@geist-ui/core";
-import { Spacer } from "@nextui-org/react"
-import styles from '@/styles/Perguntas.module.css'
+import { Spacer } from "@nextui-org/react";
+import styles from '@/styles/Perguntas.module.css';
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Select from "react-select";
 import { getBancos } from "@/services/getBancos";
 import Pergunta6Table from "@/components/perguntas/pergunta6/tabela";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
   
   export default function Pergunta6() {
@@ -22,11 +22,11 @@ import { getResposta6 } from "@/services/perguntas_v2";
 		populaBancos();
 	}, []);
   
-	const handleChange = (newValue: any | null) => {
-	  if (newValue !== null) {
-		const { value, label } = newValue as { value: string; label: string };
-		setBancoSelected(value);
-	  }
+	const handleChange = (event: ChangeEvent<HTMLInputElement> | null) => {
+		if(event !== null) {
+			const value = event.target.value;
+			setBancoSelected(value);
+		}
 	};
   
 	async function queryPergunta6(nm_banco: string) {
@@ -53,26 +53,18 @@ import { getResposta6 } from "@/services/perguntas_v2";
 			  <Spacer y={1} />
 			  <Select
 				options={options}
-				onChange={handleChange}
+				onChange={event => handleChange(event)}
 				styles={{
 				  control: (baseStyles, state) => ({
-					...baseStyles,
-					backgroundColor: "black",
+					...baseStyles, backgroundColor: "black",
 					color: "white",
 				  }),
-				  input: (provided) => ({
-					...provided,
-					color: "white",
-				  }),
+				  input: (provided) => ({ ...provided, color: "white" }),
 				  option: (baseStyles, state) => ({
-					...baseStyles,
-					color: "white",
+					...baseStyles, color: "white",
 					backgroundColor: "black",
 				  }),
-				  singleValue: (provided) => ({
-					...provided,
-					color: "white",
-				  }),
+				  singleValue: (provided) => ({ ...provided, color: "white" }),
 				}}
 			  />
   
