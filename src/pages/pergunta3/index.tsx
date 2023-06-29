@@ -86,8 +86,12 @@ export default function Pergunta3() {
 
 						<div>
 							<Spacer y={1} />
-							<h1>{inst_name()}</h1>
-							<h2>{complaint_amount()}</h2>
+							<h1>
+								{(data !== undefined && data.length !== 0) ? `${data[0].qtd_total_reclamacoes} reclamações`: "" }
+							</h1>
+							<h2>
+								{(data !== undefined && data.length !== 0) ? `${data[0].qtd_total_reclamacoes} reclamações` : "" }
+							</h2>
 						</div>
 						</div>
 					</main>
