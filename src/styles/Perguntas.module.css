@@ -23,7 +23,7 @@
   }
   
   .tablewrapper {
-    height: 600px;
+    height: 60vh;
     border-radius: 8px;
     overflow-y: scroll;
     outline: auto;
