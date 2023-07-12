@@ -8,7 +8,7 @@ interface TableProps {
 
 const Pergunta6: React.FC<TableProps> = ({ data }) => {
   if (!data) {
-    return null; // ou exiba uma mensagem de carregamento ou um estado vazio, conforme necessário
+    return <p>Não foi possível retornar os dados para esse banco em específico</p>; // ou exiba uma mensagem de carregamento ou um estado vazio, conforme necessário
   }
 
   // Ordena os itens por ano antes de renderizar a tabela

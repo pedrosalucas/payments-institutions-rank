@@ -31,6 +31,25 @@ export default function Pergunta10 () {
 
       <div className={styles.flexmid}>
         <Pergunta10Table data={data}/>
+        <div>
+              <Text marginLeft={2} width={40} font="18px" h2>
+                <Text>
+                Nesta análise, destacamos as instituições financeiras que apresentam o maior número absoluto de reclamações em cada período de referência. Com base em dados detalhados e atualizados, examinamos o desempenho dessas instituições em relação à quantidade total de reclamações recebidas.
+                </Text>
+                <br/>
+                <Text >
+                Ao analisar essas informações, podemos identificar as instituições financeiras que estão recebendo um grande volume de reclamações, permitindo uma comparação entre elas. Essa análise revela as instituições que enfrentam um maior número de desafios no atendimento e na satisfação dos clientes.
+                </Text>
+                <br/>
+                <Text>
+                Essa análise é valiosa para entender quais instituições financeiras estão lidando com um grande volume de reclamações em cada período de referência. Essas informações ajudam a avaliar a reputação e o desempenho dessas instituições, oferecendo uma base sólida para tomar decisões financeiras mais informadas.
+                </Text>
+                <br/>
+                <Text >
+                A tabela ao lado apresenta as instituições financeiras com o maior número absoluto de reclamações em cada período de referência. Esses resultados fornecem uma visão clara das instituições que estão recebendo um volume considerável de reclamações e podem exigir uma análise mais aprofundada sobre a qualidade do serviço oferecido.
+                </Text> 
+              </Text>
+          </div>
       </div>
   </div>
   )
