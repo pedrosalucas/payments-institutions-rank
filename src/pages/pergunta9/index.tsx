@@ -57,6 +57,25 @@ export default function Pergunta9Page() {
           <Spacer y={2}/>
           <div className={styles.flexmid}>
             <Pergunta9Table data={data} />
+            <div>
+              <Text marginLeft={2} width={40} font="18px" h2>
+                <Text>
+                Nesta análise, destacamos as 10 empresas que apresentam o maior número de reclamações não reguladas em relação à quantidade total de reclamações recebidas em determinado ano. Com base em dados detalhados e atualizados, examinamos o desempenho dessas empresas em relação às reclamações não reguladas.
+                </Text>
+                <br/>
+                <Text >
+                Ao analisar essas informações, podemos identificar as empresas que estão enfrentando um desafio específico em relação às reclamações não reguladas. Essas reclamações podem abranger aspectos não regulamentados do setor financeiro, exigindo uma análise mais detalhada para identificar as áreas que precisam ser melhoradas.
+                </Text>
+                <br/>
+                <Text>
+                Essa análise é valiosa para entender quais empresas estão enfrentando uma maior quantidade de reclamações não reguladas em relação ao total de reclamações recebidas. Isso permite que você avalie como essas empresas estão lidando com essas reclamações e tome decisões informadas ao selecionar suas instituições financeiras.
+                </Text>
+                <br/>
+                <Text >
+                A tabela ao lado destaca as 10 empresas com o maior número de reclamações não reguladas em relação à quantidade total de reclamações em determinado ano. Esses resultados fornecem uma visão clara das empresas que estão enfrentando um desafio nessa área específica e podem exigir atenção para melhorar a qualidade do serviço oferecido.
+                </Text> 
+              </Text>
+          </div>
           </div>
         </div>
       </div>

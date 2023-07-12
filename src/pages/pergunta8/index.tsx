@@ -60,6 +60,25 @@ export default function Pergunta8Page() {
 
         <div className={styles.flexmid}>
           <Pergunta8Table data={data} />
+          <div>
+              <Text marginLeft={2} width={40} font="18px" h2>
+                <Text>
+                Nesta análise, destacamos as 10 empresas que se destacam pelo maior número de reclamações reguladas procedentes e, ao mesmo tempo, pelo menor número de reclamações não reguladas em determinado ano. Com base em dados detalhados e atualizados, examinamos o desempenho dessas empresas em relação à resolução de reclamações reguladas e não reguladas.
+                </Text>
+                <br/>
+                <Text >
+                Ao analisar essas informações, podemos identificar as empresas que estão efetivamente resolvendo as reclamações reguladas de seus clientes de forma satisfatória, enquanto apresentam um menor número de reclamações não reguladas. Isso demonstra o compromisso dessas empresas em garantir um serviço de qualidade e uma experiência positiva para seus clientes.
+                </Text>
+                <br/>
+                <Text>
+                Essa análise é valiosa para avaliar o desempenho e a reputação das empresas em relação ao tratamento das reclamações dos consumidores. Ao identificar as empresas com os melhores resultados em termos de reclamações reguladas procedentes e baixo número de reclamações não reguladas, você terá uma base sólida para tomar decisões financeiras mais informadas e confiantes.
+                </Text>
+                <br/>
+                <Text >
+                A tabela ao lado apresenta as 10 empresas que se destacam pelo maior número de reclamações reguladas procedentes e pelo menor número de reclamações não reguladas em determinado ano. Esses resultados fornecem uma visão clara das empresas que estão fazendo um trabalho efetivo em lidar com as reclamações de seus clientes.
+                </Text> 
+              </Text>
+          </div>
         </div>
       </div>
     </div>

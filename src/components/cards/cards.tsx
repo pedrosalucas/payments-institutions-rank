@@ -132,7 +132,7 @@ export default function Cards () {
               Pergunta 10 <span>-&gt;</span>
             </h2>
             <p style={{textAlign:'justify'}}>
-              Quais são as 10 instituições financeiras com o maior número absoluto de reclamações em cada período de referência?
+              Quais são as instituições financeiras com o maior número absoluto de reclamações em cada período de referência?
             </p>
           </a>
         </div>
