@@ -17,6 +17,16 @@
   left: 0px;
 }
 
+.signin {
+  align-items: center;
+  width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  color: aqua;
+}
+
 .container {
   justify-content: flex-start;
   flex-direction: column;

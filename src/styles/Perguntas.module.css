@@ -1,7 +1,12 @@
 .grid {
-    
-    
     border-radius: 8px;
+  }
+
+  .signin {
+    align-items: center;
+    width: 400px;
+    border-radius: 8px;
+    
   }
 
   .flexmid {
