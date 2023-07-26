@@ -1,8 +1,8 @@
-import { Avatar, User } from "@geist-ui/core";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import { Text, Link } from "@geist-ui/core";
 import { Spacer } from "@nextui-org/react"
+import LoginButton from "../loginButton/loginButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +24,8 @@ const Navbar = () => {
           </Link>
         </div>
         <div>
-            <Text b>Osvaldo</Text>
-            
+          
+            <LoginButton/>
         </div>
       </div>
     </main>

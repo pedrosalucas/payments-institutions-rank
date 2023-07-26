@@ -5,15 +5,24 @@ import { useEffect, useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta10Table from "@/components/perguntas/pergunta10/tabela";
 import { Spacer } from '@nextui-org/react'
+import { Loading } from '@nextui-org/react';
 
 
 export default function Pergunta10 () {
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>([]);
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     async function respostaPergunta10() {
-      const response = await getResposta(10);
-      setData(response);
+      try {
+        const response = await getResposta(10);
+        setData(response);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+      
     }
 
     respostaPergunta10();
@@ -30,6 +39,10 @@ export default function Pergunta10 () {
       <Spacer y={0.5}/>
 
       <div className={styles.flexmid}>
+      {isLoading ? (
+          <Loading size="xl" color="white" textColor="white">Carregando</Loading>
+        ) : (
+          <>
         <Pergunta10Table data={data}/>
         <div>
               <Text marginLeft={2} width={40} font="18px" h2>
@@ -50,6 +63,8 @@ export default function Pergunta10 () {
                 </Text> 
               </Text>
           </div>
+          </>
+        )}
       </div>
   </div>
   )
