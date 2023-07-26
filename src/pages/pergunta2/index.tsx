@@ -18,7 +18,7 @@ export default function Pergunta2() {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false); // Defina isLoading como falso depois que os dados forem carregados (com sucesso ou erro)
+        setIsLoading(false);
       }
     }
 
