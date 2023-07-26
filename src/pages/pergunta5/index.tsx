@@ -29,6 +29,7 @@ export default function Pergunta5() {
     <div className={styles.grid}>
       <div className={styles.flexmid}>
         <Text marginBottom="2vh" h1 style={{ letterSpacing: '0.6px' }}>
+
           <Text span>Resultados</Text>
         </Text>
       </div>
