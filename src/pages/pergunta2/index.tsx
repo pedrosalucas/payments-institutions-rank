@@ -4,7 +4,7 @@ import { getResposta } from "@/services/perguntas_v1";
 import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta2Table from "@/components/perguntas/pergunta2/tabela";
-import { Loading } from '@nextui-org/react'; // Importe o componente Loading do @nextui-org/react
+import { Loading } from '@nextui-org/react'; 
 
 export default function Pergunta2() {
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
