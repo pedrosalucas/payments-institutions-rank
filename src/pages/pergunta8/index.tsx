@@ -7,8 +7,11 @@ import Select from "react-select";
 import {Spacer} from "@nextui-org/react"
 import { getResposta as getRespostaV1 } from "@/services/perguntas_v1";
 import { getResposta8 as getRespostaV2 } from "@/services/perguntas_v2";
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
 export default function Pergunta8Page() {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const options = [];
 
@@ -16,19 +19,19 @@ export default function Pergunta8Page() {
     options.push({ value: ano, label: String(ano) });
   }
 
-  useEffect(() => {
-    async function respostaPergunta8() {
-      const response = await getRespostaV1(8);
-      setData(response);
-    }
-
-    respostaPergunta8();
-  }, []);
+  async function respostaPergunta8() {
+    const response = await getRespostaV1(8);
+    setData(response);
+  }
 
   const handleChange = async (opcaoSelecionada: any) => {
     const newData = await getRespostaV2(opcaoSelecionada.value);
     setData(newData);
   };
+
+  if(!session) { return (<UnauthorizedMessage/>); }
+
+  respostaPergunta8();
 
   return (
     <div>

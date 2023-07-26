@@ -11,10 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Navbar = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
-
-  console.log("Session:", session);
-  console.log("Status:", status);
+  const { data: session } = useSession();
 
   return (
     <header className={` ${inter.className}`}>
@@ -40,9 +37,14 @@ const Navbar = () => {
               </Button>
             </>
           ) : (
-            <Button onClick={() => router.push('/login')}>
-              Login
-            </Button>
+            <>
+              <Button onClick={() => router.push('/login')}>
+                Login
+              </Button>
+              <Button onClick={() => router.push('/register')}>
+                Cadastro
+              </Button>
+            </>
           )} 
         </div>
       </div>

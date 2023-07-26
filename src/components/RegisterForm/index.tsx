@@ -61,7 +61,7 @@ const RegisterForm = () => {
         />
       </div>
 
-      <button type="submit">{loading ? "Carregando..." : "Cadastrar"}</button>
+      <button type="submit" disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</button>
     </form>
   );
 }

@@ -5,19 +5,22 @@ import { useEffect, useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta10Table from "@/components/perguntas/pergunta10/tabela";
 import { Spacer } from '@nextui-org/react'
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
 
 export default function Pergunta10 () {
+  const { data: session } = useSession();
   const [data, setData] =  useState<tb_reclamacao_cliente_por_if[]>([]);
   
-  useEffect(() => {
-    async function respostaPergunta10() {
-      const response = await getResposta(10);
-      setData(response);
-    }
+  async function respostaPergunta10() {
+    const response = await getResposta(10);
+    setData(response);
+  }
 
-    respostaPergunta10();
-  }, []);
+  if(!session) { return (<UnauthorizedMessage/>); }
+
+  respostaPergunta10();
 
   return(
     <div>

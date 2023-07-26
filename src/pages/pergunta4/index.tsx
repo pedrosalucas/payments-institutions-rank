@@ -6,10 +6,15 @@ import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import styles from '@/styles/Perguntas.module.css'
 import Pergunta4Table from "@/components/perguntas/pergunta4/tabela";
 import { getResposta4 } from "@/services/perguntas_v2";
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
 export default function Pergunta4 () {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const options = [];
+
+  if(!session) { return (<UnauthorizedMessage/>); }
 
   for (let ano = 2017; ano <= 2023; ano++) {
     for (let trimestre = 1; trimestre <= 4; trimestre++) {

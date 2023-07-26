@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { prisma } from '@/db';
-import { NextApiRequest } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Prisma } from '@prisma/client';
 
 export default async function handler(
   req: ExtendedNextApiRequest,
-  res: NextResponse
+  res: NextApiResponse
 ) {
   if (req.method === 'POST') {
     try {
@@ -21,19 +21,20 @@ export default async function handler(
         }
       });
   
-      return NextResponse.json({ user: { email: user.email } });
+      return res.status(200).json({ user: { email: user.email } });
   
     } catch (err: any) {
-      return new NextResponse(
-        JSON.stringify({ status: "error", error: err.message }),
-        { status: 500 }
-      );
+      console.error(err);
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === 'P2002') {
+          return res.status(422).json({ status: "error", error: "Já exite um usuário com esses dados." });
+        }
+      } else {
+        return res.status(500).json({ status: "error", error: err.message });
+      }
     }
   } else {
-    return new NextResponse(
-      JSON.stringify({ status: "error", error: "Method not allowed" }),
-      { status: 405 }
-    );
+    return res.status(405).json({ status: "error", error: "Method not allowed" });
   }
 }
 
