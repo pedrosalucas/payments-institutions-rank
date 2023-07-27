@@ -1,11 +1,10 @@
-'use client'
-
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import { Text, Link, Button } from "@geist-ui/core";
 import { Spacer } from "@nextui-org/react"
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, usePathname } from 'next/navigation';
+import LoginButton from "../loginButton/loginButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,6 +56,7 @@ const Navbar = () => {
 
         <div>
           {sessionContextButtons()} 
+          <LoginButton/>
         </div>
       </div>
     </header>

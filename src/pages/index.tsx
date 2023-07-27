@@ -1,12 +1,59 @@
 import Head from 'next/head'
-import { Text, Spacer, Table} from '@geist-ui/core'
+import { Text, Spacer, Table, Button} from '@geist-ui/core'
+import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import { Inter } from 'next/font/google'
 import Cards from '@/components/cards/cards'
+import { useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['vietnamese'] })
 
 export default function Home() {
+  const [userLocation, setUserLocation] = useState<null | { latitude: number; longitude: number; }>(null);
+  const [userAddress, setUserAddress] = useState('');
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+          fetchAddress(latitude, longitude);
+        },
+        (error) => console.error(error)
+      );
+    }
+  }, []);
+
+  const fetchAddress = async (latitude: number, longitude: number) => {
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBzDfzIdaMsAdkGlg4-sYrXJ5bJkyzi5Xw`
+      );
+      const data = await response.json();
+      if (data?.results?.length > 0) {
+        const address = data.results[0].formatted_address;
+        setUserAddress(address);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleGetLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+          fetchAddress(latitude, longitude);
+        },
+        (error) => console.error(error)
+      );
+    } else {
+      console.error('Geolocation não é suportado pelo seu navegador.');
+    }
+  };
   return (
     <>
       <Head>
@@ -26,6 +73,17 @@ export default function Home() {
       <Cards/>
       <Spacer h={3}/>
       <Table></Table>
+
+      {userAddress ? (
+        <div>
+          <Text h3>Seu endereço:</Text>
+          <Text>{userAddress}</Text>
+        </div>
+      ) : (
+        <Button onClick={handleGetLocationClick}>Obter Localização</Button>
+      )}
+
+      
     </>
   )
 }
