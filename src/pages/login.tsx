@@ -1,14 +1,15 @@
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../lib/auth";
 import LoginForm from "@/components/LoginForm";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 
 export default function Login() {
-    // const session = getServerSession(authOptions);
-    // const user = session?.user;
+  const { data: session } = useSession();
+  const router = useRouter()
 
-    // {(user && user?.email) ? user?.email : "Not logged in"} 
+  if(session) { router.push('/'); }
+
   return (
     <section>
       <LoginForm />

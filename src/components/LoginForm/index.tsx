@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Button } from "@geist-ui/core";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -32,11 +31,15 @@ const LoginForm = () => {
       if(!res?.error) {
         router.push(callbackUrl);
       } else {
-        setError("invalid");
+        if(res?.error) {
+          setError(res?.error);
+        } else {
+          setError("Erro ao cadastrar usuário.");
+        }
       }
     } catch (err: any) {
+      setError("Dados inválidos.");
       setLoading(false);
-      setError(err);
     }
   };
 

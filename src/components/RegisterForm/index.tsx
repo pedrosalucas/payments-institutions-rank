@@ -20,16 +20,19 @@ const RegisterForm = () => {
       setLoading(true);
       const res = await register(formValue);
 
-      console.log(res);
       setLoading(false);
       if(!res?.error) {
-        // router.push(callbackUrl);
+        router.push(`/login?callbackUrl=${callbackUrl}`);
       } else {
-        setError("invalid");
+        if(res?.error) {
+          setError(res?.error);
+        } else {
+          setError("Erro ao cadastrar usuário.");
+        }
       }
     } catch (err: any) {
+      setError("Dados inválidos.");
       setLoading(false);
-      setError(err);
     }
   };
 

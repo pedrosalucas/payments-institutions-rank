@@ -1,14 +1,14 @@
-
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../lib/auth";
 import RegisterForm from "@/components/RegisterForm";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 export default function Register() {
-    // const session = getServerSession(authOptions);
-    // const user = session?.user;
+  const { data: session } = useSession();
+  const router = useRouter()
 
-    // {(user && user?.email) ? user?.email : "Not logged in"} 
+  if(session) { router.push('/'); }
+
   return (
     <section>
       <RegisterForm />

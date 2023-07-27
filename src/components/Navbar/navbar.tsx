@@ -5,13 +5,40 @@ import { Inter } from "next/font/google";
 import { Text, Link, Button } from "@geist-ui/core";
 import { Spacer } from "@nextui-org/react"
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useSession();
+
+  const sessionContextButtons = () => {
+    if(session) {
+      return (
+        <>
+          <Text b>Osvaldo</Text>
+          <Button onClick={() => signOut()}>
+            Sair
+          </Button>
+        </>
+      );
+    } else if(pathname != '/login' && pathname != '/register') {
+      return (
+        <>
+          <Button onClick={() => router.push(`/login?callbackUrl=${pathname}`)}>
+            Login
+          </Button>
+          <Button onClick={() => router.push(`/register?callbackUrl=${pathname}`)}>
+            Cadastro
+          </Button>
+        </>
+      );
+    }
+
+    return null;
+  }
 
   return (
     <header className={` ${inter.className}`}>
@@ -29,23 +56,7 @@ const Navbar = () => {
         </div>
 
         <div>
-          {session ? (
-            <>
-              <Text b>Osvaldo</Text>
-              <Button onClick={() => signOut()}>
-                Sair
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button onClick={() => router.push('/login')}>
-                Login
-              </Button>
-              <Button onClick={() => router.push('/register')}>
-                Cadastro
-              </Button>
-            </>
-          )} 
+          {sessionContextButtons()} 
         </div>
       </div>
     </header>
