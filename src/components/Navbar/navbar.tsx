@@ -4,7 +4,6 @@ import { Text, Link, Button } from "@geist-ui/core";
 import { Spacer } from "@nextui-org/react"
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, usePathname } from 'next/navigation';
-import LoginButton from "../loginButton/loginButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,8 +54,7 @@ const Navbar = () => {
         </div>
 
         <div>
-          {sessionContextButtons()} 
-          <LoginButton/>
+          {sessionContextButtons()}
         </div>
       </div>
     </header>
