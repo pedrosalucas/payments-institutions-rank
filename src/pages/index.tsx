@@ -32,7 +32,7 @@ export default function Home() {
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBzDfzIdaMsAdkGlg4-sYrXJ5bJkyzi5Xw`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.GET_GOOGLE_MAPS_API_KEY}`
         );
         const data = await response.json();
         if (data?.results?.length > 0) {
