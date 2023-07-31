@@ -46,7 +46,6 @@ export default function Home() {
 
   const visitorsCount = async () => {
     const visitorsAmount: { id: string, value: number } = await getVisitorsCount();
-    console.log(visitorsAmount);
     setVisitorsAmount(visitorsAmount.value);
 	}
   
