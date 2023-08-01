@@ -3,9 +3,10 @@ import { Text, Spacer, Table, Button } from "@geist-ui/core";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import Cards from "@/components/cards/cards";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getVisitorAddress } from "@/services/getVisitorAddress";
 import { getVisitorsCount } from "@/services/getVisitorsCount";
+import { getAccessHistory, setNewAccessInfo } from "@/services/accessInfo";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -28,9 +29,20 @@ export default function Home() {
         (error) => console.error(error)
       );
     }
-
+    //teste(); //! ARRUMAR UMA ALTERNATIVA MELHOR!
     visitorsCount();
   }, []);
+
+  /* const teste = async () => { // ! ARRUMAR UMA ALTERNATIVA MELHOR!
+    const data = {
+      ip_acesso: "teste acesso",
+      nm_cidade: "teste cidade",
+      nm_estado: "teste estado",
+      nm_pais: "teste pais",
+      cont_acessos: 1,
+    } as tb_historico_acesso;
+    console.log(await setNewAccessInfo(data));
+  }; */
 
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
@@ -57,6 +69,7 @@ export default function Home() {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
           fetchAddress(latitude, longitude);
+          teste();
         },
         (error) => console.error(error)
       );
