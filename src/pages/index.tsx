@@ -29,20 +29,23 @@ export default function Home() {
         (error) => console.error(error)
       );
     }
-    //teste(); //! ARRUMAR UMA ALTERNATIVA MELHOR!
+    testeNovoAcesso(); //alterar quando for possível recuperar o ip e os componentes do endereço
     visitorsCount();
   }, []);
 
-  /* const teste = async () => { // ! ARRUMAR UMA ALTERNATIVA MELHOR!
-    const data = {
-      ip_acesso: "teste acesso",
-      nm_cidade: "teste cidade",
-      nm_estado: "teste estado",
-      nm_pais: "teste pais",
+  const testeNovoAcesso = async () => {
+    //alterar quando for possível recuperar o ip e os componentes do endereço
+    const novoAcesso = {
+      ip_acesso: "localhost",
+      nm_cidade: "unknown",
+      nm_estado: "unknown",
+      nm_pais: "unknown",
       cont_acessos: 1,
     } as tb_historico_acesso;
-    console.log(await setNewAccessInfo(data));
-  }; */
+
+    const response = await setNewAccessInfo(novoAcesso);
+    console.log(response);
+  };
 
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
