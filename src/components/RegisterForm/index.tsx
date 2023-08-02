@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import {Button, FormElement, Input, Spacer} from '@nextui-org/react'
 import { register } from "@/services/register";
-import styles from '@/styles/Auth.module.css'
+import {Button, FormElement, Input, Spacer} from '@nextui-org/react';
+import styles from '@/styles/Auth.module.css';
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -37,8 +37,8 @@ const RegisterForm = () => {
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+  const handleChange = (e: ChangeEvent<FormElement>) => {
+    const {name, value} = e.target;
     setFormValue({...formValue, [name]: value});
   }
 
@@ -60,14 +60,14 @@ const RegisterForm = () => {
               />
 
               <Input.Password
-                        required
-                        type="password"
-                        name="password"
-                        value={formValue.password}
-                        onChange={handleChange}
-                        label="Senha"
-                        placeholder="Sua Senha...."
-                        size="xl" width="100%"
+                required
+                type="password"
+                name="password"
+                value={formValue.password}
+                onChange={handleChange}
+                label="Senha"
+                placeholder="Sua Senha...."
+                size="xl" width="100%"
               />
               <Spacer y={1}/>
             <p>
