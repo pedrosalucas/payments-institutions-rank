@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import styles from '@/styles/Perguntas.module.css'
-import {FormElement, Input} from '@nextui-org/react'
+import styles from '@/styles/Auth.module.css'
+import {Button, FormElement, Input, Spacer} from '@nextui-org/react'
 
 const LoginForm = () => {
   const router = useRouter();
@@ -51,8 +51,9 @@ const LoginForm = () => {
   }
 
   return (
-    <div className={styles.flexmid}>
-      <div className={styles.signin}>
+    <div className={styles.container}>
+      <div className={styles.loginbox}>
+        <h1>Login</h1>
         <Input
           required
           type="email"
@@ -74,8 +75,12 @@ const LoginForm = () => {
           placeholder="Sua Senha...."
           size="xl" width="100%"
         />
-
-        <button type="submit" onClick={handleSubmit} disabled={loading}>{loading ? "Carregando..." : "Entrar"}</button>
+        <Spacer y={1}/>
+        <p>
+          Não possui uma conta? <a href="../register"> Faça o cadastro.</a>
+        </p>
+        <Spacer y={1}/>
+        <Button size='lg'  onClick={handleSubmit} disabled={loading}>{loading ? "Carregando..." : "Entrar"}</Button>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-
+import {Button, FormElement, Input, Spacer} from '@nextui-org/react'
 import { register } from "@/services/register";
+import styles from '@/styles/Auth.module.css'
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const RegisterForm = () => {
   });
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || '/'
+  const callbackUrl = searchParams.get('/')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,28 +44,41 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          required
-          type="email"
-          name="email"
-          value={formValue.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <input
-          required
-          type="password"
-          name="password"
-          value={formValue.password}
-          onChange={handleChange}
-          placeholder="Senha"
-        />
+      <div className={styles.container}>
+        <div className={styles.loginbox}>
+          <h1>Cadastro</h1>
+              <Input
+                required
+                type="email"
+                name="email"
+                value={formValue.email}
+                onChange={handleChange}
+                clearable
+                label="Email"
+                placeholder="Seu email...."
+                size="xl" width="100%"
+              />
+
+              <Input.Password
+                        required
+                        type="password"
+                        name="password"
+                        value={formValue.password}
+                        onChange={handleChange}
+                        label="Senha"
+                        placeholder="Sua Senha...."
+                        size="xl" width="100%"
+              />
+              <Spacer y={1}/>
+            <p>
+              Já possui uma conta? <a href="../login"> Faça o Login.</a>
+            </p>
+          <Spacer y={1}/>
+          <Button  size='lg' disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</Button>
+        </div>
       </div>
 
-      <button type="submit" disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</button>
+      
     </form>
   );
 }
