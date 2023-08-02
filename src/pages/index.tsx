@@ -1,18 +1,21 @@
-import Head from 'next/head'
-import { Text, Spacer, Table, Button} from '@geist-ui/core'
-import Link from 'next/link'
-import styles from '@/styles/Home.module.css'
-import { Inter } from 'next/font/google'
-import Cards from '@/components/cards/cards'
-import { useEffect, useState } from 'react'
-import { getVisitorsCount } from '@/services/getVisitorsCount'
+import Head from "next/head";
+import { Text, Spacer, Table, Button } from "@geist-ui/core";
+import styles from "@/styles/Home.module.css";
+import { Inter } from "next/font/google";
+import Cards from "@/components/cards/cards";
+import { useEffect, useState } from "react";
+import { getVisitorAddress } from "@/services/getVisitorAddress";
+import { getVisitorsCount } from "@/services/getVisitorsCount";
 
-const inter = Inter({ subsets: ['vietnamese'] })
+const inter = Inter({ subsets: ["vietnamese"] });
 
 export default function Home() {
-  const [userLocation, setUserLocation] = useState<null | { latitude: number; longitude: number; }>(null);
+  const [userLocation, setUserLocation] = useState<null | {
+    latitude: number;
+    longitude: number;
+  }>(null);
   const [visitorsAmount, setVisitorsAmount] = useState<null | number>(null);
-  const [userAddress, setUserAddress] = useState('');
+  const [userAddress, setUserAddress] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -28,16 +31,13 @@ export default function Home() {
 
     visitorsCount();
   }, []);
-  
+
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.GET_GOOGLE_MAPS_API_KEY}`
-        );
-        const data = await response.json();
-        if (data?.results?.length > 0) {
-          const address = data.results[0].formatted_address;
-          setUserAddress(address);
+      const data = await getVisitorAddress(latitude, longitude);
+      if (data?.results?.length > 0) {
+        const address = data.results[0].formatted_address;
+        setUserAddress(address);
       }
     } catch (error) {
       console.error(error);
@@ -45,10 +45,11 @@ export default function Home() {
   };
 
   const visitorsCount = async () => {
-    const visitorsAmount: { id: string, value: number } = await getVisitorsCount();
+    const visitorsAmount: { id: string; value: number } =
+      await getVisitorsCount();
     setVisitorsAmount(visitorsAmount.value);
-	}
-  
+  };
+
   const handleGetLocationClick = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -58,13 +59,13 @@ export default function Home() {
           fetchAddress(latitude, longitude);
         },
         (error) => console.error(error)
-        );
-      } else {
-        console.error('Geolocation não é suportado pelo seu navegador.');
-      }
-    };
-    
-    return (
+      );
+    } else {
+      console.error("Geolocation não é suportado pelo seu navegador.");
+    }
+  };
+
+  return (
     <>
       <Head>
         <title>Payments Institutions Rank</title>
@@ -73,19 +74,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        
       <div className={styles.container}>
-          <Text h1>As instituições financeiras agora, mais transparentes</Text>
-          <br></br>
-          <Text h2 width={"60%"}> Tenha uma visão abrangente do ranking de instituições financeiras com base em diversos fatores. Informações valiosas sobre a reputação e o desempenho das instituições financeiras, permite que você tome decisões informadas ao escolher um parceiro financeiro.</Text>
+        <Text h1>As instituições financeiras agora, mais transparentes</Text>
+        <br></br>
+        <Text h2 width={"60%"}>
+          {" "}
+          Tenha uma visão abrangente do ranking de instituições financeiras com
+          base em diversos fatores. Informações valiosas sobre a reputação e o
+          desempenho das instituições financeiras, permite que você tome
+          decisões informadas ao escolher um parceiro financeiro.
+        </Text>
       </div>
 
-      <Spacer h={3}/>
-      <Cards/>
-      <Spacer h={3}/>
+      <Spacer h={3} />
+      <Cards />
+      <Spacer h={3} />
       <Table></Table>
 
-      <Text h2>Quantidade de Acessos: {visitorsAmount ? visitorsAmount : ''}</Text>
+      <Text h2>
+        Quantidade de Acessos: {visitorsAmount ? visitorsAmount : ""}
+      </Text>
 
       {userAddress ? (
         <div>
@@ -95,8 +103,6 @@ export default function Home() {
       ) : (
         <Button onClick={handleGetLocationClick}>Obter Localização</Button>
       )}
-
-      
     </>
-  )
+  );
 }
