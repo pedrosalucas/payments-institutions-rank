@@ -6,6 +6,10 @@ const URL_PATH =
 export async function getVisitorAddress(lat: number, lng: number) {
   const response = await fetch(`${URL_PATH}/api/visitorAddress`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
     body: JSON.stringify({
       lat: lat.toString(),
       lng: lng.toString(),

@@ -5,12 +5,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const requestMethod = req.method;
+  let ip = req.headers["x-real-ip"] as string;
+
+  const forwardedFor = req.headers["x-forwarded-for"] as string;
+  if (!ip && forwardedFor) {
+    ip = forwardedFor?.split(",").at(0) ?? "Unknown";
+  }
 
   switch (requestMethod) {
     case "POST":
-      const params = JSON.parse(req.body);
+      const requestBody = req.body;
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${params.lat},${params.lng}&key=${process.env.GET_GOOGLE_MAPS_API_KEY}`,
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${requestBody.lat},${requestBody.lng}&key=${process.env.GET_GOOGLE_MAPS_API_KEY}`,
         {
           method: "GET",
           headers: {
@@ -19,7 +25,7 @@ export default async function handler(
         }
       );
       const data = await response.json();
-      res.status(200).json(data);
+      res.status(200).json({ access_ip: ip, data: data });
       break;
     default:
       return res

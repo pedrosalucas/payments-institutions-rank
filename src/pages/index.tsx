@@ -3,10 +3,12 @@ import { Text, Spacer, Table, Button } from "@geist-ui/core";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import Cards from "@/components/cards/cards";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getVisitorAddress } from "@/services/getVisitorAddress";
 import { getVisitorsCount } from "@/services/getVisitorsCount";
 import { getAccessHistory, setNewAccessInfo } from "@/services/accessInfo";
+import addressParser from "@/services/getAddressParsed";
+import { tb_historico_acesso } from "@prisma/client";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -29,30 +31,27 @@ export default function Home() {
         (error) => console.error(error)
       );
     }
-    testeNovoAcesso(); //alterar quando for possível recuperar o ip e os componentes do endereço
     visitorsCount();
   }, []);
 
-  const testeNovoAcesso = async () => {
-    //alterar quando for possível recuperar o ip e os componentes do endereço
-    const novoAcesso = {
-      ip_acesso: "localhost",
-      nm_cidade: "unknown",
-      nm_estado: "unknown",
-      nm_pais: "unknown",
-      cont_acessos: 1,
-    } as tb_historico_acesso;
-
-    const response = await setNewAccessInfo(novoAcesso);
-    console.log(response);
+  const setNewAccess = async (acessObject: tb_historico_acesso) => {
+    const response = await setNewAccessInfo(acessObject);
   };
 
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
-      const data = await getVisitorAddress(latitude, longitude);
+      const visitorAddress = await getVisitorAddress(latitude, longitude);
+      const data = visitorAddress.data;
+
       if (data?.results?.length > 0) {
         const address = data.results[0].formatted_address;
         setUserAddress(address);
+        setNewAccess(
+          addressParser(
+            data.results[0].address_components,
+            visitorAddress.access_ip
+          )
+        );
       }
     } catch (error) {
       console.error(error);
@@ -72,7 +71,6 @@ export default function Home() {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
           fetchAddress(latitude, longitude);
-          teste();
         },
         (error) => console.error(error)
       );

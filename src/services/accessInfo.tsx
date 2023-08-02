@@ -15,6 +15,10 @@ export async function setNewAccessInfo(accessInfo: tb_historico_acesso) {
 
   const response = await fetch(`${URL_PATH}/api/accessInfo/newAccess/`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
     body: JSON.stringify(body),
   });
   const data = await response.json();
