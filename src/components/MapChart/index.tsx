@@ -3,8 +3,6 @@ import { Spinner } from "@nextui-org/react";
 import Filter from "./Filter";
 import MapView from "./MapView";
 
-// TODO: Adicionar busca de longitude e latitude
-
 const MapChart = () => {
   const [countryName , setCountryName] = useState<string | null>(null);
   const [stateName, setStateName] = useState<string | null>(null);

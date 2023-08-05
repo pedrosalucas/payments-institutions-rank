@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Text, Spacer, Table, Button } from "@geist-ui/core";
 import styles from "@/styles/Home.module.css";
@@ -65,6 +66,10 @@ export default function Home() {
     }
   };
 
+  const MapChartWithNoSSR = dynamic(() => import("@/components/MapChart"), {
+    ssr: false
+  });
+
   return (
     <>
       <Head>
@@ -91,18 +96,7 @@ export default function Home() {
       <Spacer h={3} />
       <Table></Table>
 
-      <Text h2>
-        Quantidade de Acessos: {visitorsAmount ? visitorsAmount : ""}
-      </Text>
-
-      {userAddress ? (
-        <div>
-          <Text h3>Seu endereço:</Text>
-          <Text>{userAddress}</Text>
-        </div>
-      ) : (
-        <Button onClick={handleGetLocationClick}>Obter Localização</Button>
-      )}
+      <MapChartWithNoSSR/>
     </>
   );
 }
