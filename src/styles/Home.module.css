@@ -293,3 +293,20 @@
     transform: rotate(0deg);
   }
 }
+
+.select_map {
+  width: 85%;
+  height: 85%;
+  background-color: rgb(255 255 255 / 10%);
+  padding: 5px 15px 5px;
+  border-radius: 10px;
+}
+
+.select_map:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.option{
+  background-color: #111;
+}

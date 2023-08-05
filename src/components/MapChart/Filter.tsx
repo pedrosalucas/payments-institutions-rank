@@ -1,47 +1,40 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import Select from "react-select";
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { Text } from "@geist-ui/core";
+import styles from "@/styles/Home.module.css";
 
-const Filter = ({title, setName, setCoordinates}: {
+const Filter = ({title, value, options, setName, disabled, isLoading, callbackOnChange}: {
   title: string,
-  setName: Dispatch<SetStateAction<string>>
-  setCoordinates: Dispatch<SetStateAction<[number, number]>>
+  value: string | null,
+  options: string[],
+  setName: Dispatch<SetStateAction<string | null>>,
+  disabled: boolean,
+  isLoading: boolean,
+  callbackOnChange: () => void
 }) => {
+  const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    const newValue = e.target.value;
+    console.log(newValue);
 
-  const handleChange = (newValue: any| null) => {
-    if(newValue !== null) {
-      const { value } = newValue as { value: string; label: string };
-      setName(value);
-      setCoordinates([-10.9267, -37.0729]);
-    }
+    if(newValue === '') { callbackOnChange(); }
+
+    setName(newValue);
   };
-
-  const options = [
-    { value: '', label: 'Nenhum' },
-    { value: 'aracaju', label: 'Aracaju' },
-  ];
 
   return (
     <div style={{ flexGrow: '1', margin: '0 10px 0', zIndex: '99999'}}>
       <Text h3>{title}</Text>
 
-      <Select
-        options={options}
-        onChange={handleChange}
-        isClearable={true}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles, backgroundColor: 'black',
-            color: 'white',
-          }),
-          input: (provided) => ({ ...provided, color: 'white' }),
-          option: (baseStyles, state) => ({
-            ...baseStyles, color: 'white',
-            backgroundColor: 'black'
-          }),
-          singleValue: (provided) => ({ ...provided, color: 'white' })
-        }}
-      />
+      <select className={styles.select_map} onChange={handleChange} disabled={disabled}>
+      <option className={styles.option} value="" selected={value === ''  || value === null}></option>
+        { options.map((option: string) => {
+          return (
+            <option className={styles.option} key={option} value={option.toLowerCase()}>
+              {option.replace(/\b\w/g, l => l.toUpperCase())}
+            </option>
+          );
+        })}
+      </select>
     </div>
   );
 };

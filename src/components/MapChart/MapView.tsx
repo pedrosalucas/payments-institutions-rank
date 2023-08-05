@@ -21,7 +21,7 @@ const MapView= ({coordinates, zoom, localName, accessAmount}: {
         pathOptions={{ color: 'red' }}
         radius={20}>
         <Tooltip direction="top" offset={[0, -20]} permanent>
-            Acessos de {localName}: {accessAmount}
+            Acessos de {localName.replace(/\b\w/g, l => l.toUpperCase())}: {accessAmount}
         </Tooltip>
       </CircleMarker>
     </MapContainer>
