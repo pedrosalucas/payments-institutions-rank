@@ -16,7 +16,6 @@ const Navbar = () => {
     if(session) {
       return (
         <>
-          <Text b>Osvaldo</Text>
           <Button onClick={() => signOut()}>
             Sair
           </Button>
@@ -53,9 +52,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div>
-          {sessionContextButtons()}
-        </div>
+        <div>{sessionContextButtons()}</div>
       </div>
     </header>
   );
