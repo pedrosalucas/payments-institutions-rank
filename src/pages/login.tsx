@@ -1,4 +1,4 @@
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/PlainForms/login";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
