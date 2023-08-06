@@ -16,7 +16,6 @@ const Navbar = () => {
     if(session) {
       return (
         <>
-          <Text b>Osvaldo</Text>
           <Button onClick={() => signOut()}>
             Sair
           </Button>
@@ -28,6 +27,7 @@ const Navbar = () => {
           <Button onClick={() => router.push(`/login?callbackUrl=${pathname}`)}>
             Login
           </Button>
+          <span></span>
           <Button onClick={() => router.push(`/register?callbackUrl=${pathname}`)}>
             Cadastro
           </Button>
@@ -53,9 +53,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div>
-          {sessionContextButtons()}
-        </div>
+        <div>{sessionContextButtons()}</div>
       </div>
     </header>
   );
