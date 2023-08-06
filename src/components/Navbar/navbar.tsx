@@ -1,15 +1,45 @@
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
-import { Text, Link } from "@geist-ui/core";
+import { Text, Link, Button } from "@geist-ui/core";
 import { Spacer } from "@nextui-org/react"
-import LoginButton from "../loginButton/loginButton";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter, usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
 const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { data: session } = useSession();
+
+  const sessionContextButtons = () => {
+    if(session) {
+      return (
+        <>
+          <Text b>Osvaldo</Text>
+          <Button onClick={() => signOut()}>
+            Sair
+          </Button>
+        </>
+      );
+    } else if(pathname != '/login' && pathname != '/register') {
+      return (
+        <>
+          <Button onClick={() => router.push(`/login?callbackUrl=${pathname}`)}>
+            Login
+          </Button>
+          <Button onClick={() => router.push(`/register?callbackUrl=${pathname}`)}>
+            Cadastro
+          </Button>
+        </>
+      );
+    }
+
+    return null;
+  }
 
   return (
-    <main className={` ${inter.className}`}>
+    <header className={` ${inter.className}`}>
       <div className={styles.navbar}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Link href="/">
@@ -19,16 +49,15 @@ const Navbar = () => {
           </Link>
           <Spacer x={2}/>
           <Link href="/about">
-            
             <Text> Sobre Nós</Text>
           </Link>
         </div>
+
         <div>
-          
-            <LoginButton/>
+          {sessionContextButtons()}
         </div>
       </div>
-    </main>
+    </header>
   );
 };
 

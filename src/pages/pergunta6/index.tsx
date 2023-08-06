@@ -7,21 +7,24 @@ import { getBancos } from "@/services/getBancos";
 import Pergunta6Table from "@/components/perguntas/pergunta6/tabela";
 import { useState, useEffect } from "react";
 import { getResposta6 } from "@/services/perguntas_v2";
-  
-  export default function Pergunta6() {
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
+
+export default function Pergunta6() {
+  const { data: session } = useSession();
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>();
 	const [options, setOptions] = useState([]);
 	const [bancoSelected, setBancoSelected] = useState("");
-
-	useEffect(() => {
-		async function populaBancos() {
-			const bancos: any = await getBancos();
-			setOptions(bancos);
-		}
-
-		populaBancos();
-	}, []);
   
+  useEffect(() => {
+    queryPergunta6(bancoSelected);
+  }, [bancoSelected]);
+
+  async function populaBancos() {
+    const bancos: any = await getBancos();
+    setOptions(bancos);
+  }
+
 	const handleChange = (newValue: any | null) => {
 	  if (newValue !== null) {
 		const { value, label } = newValue as { value: string; label: string };
@@ -33,11 +36,11 @@ import { getResposta6 } from "@/services/perguntas_v2";
 	  const data = await getResposta6(nm_banco);
 	  setData(data);
 	}
-  
-	useEffect(() => {
-	  queryPergunta6(bancoSelected);
-	}, [bancoSelected, data]);
-  
+
+  if(!session) { return (<UnauthorizedMessage/>); }
+
+	populaBancos();
+
 	return (
 	  <div>
 		<Grid.Container gap={2}>
@@ -101,4 +104,4 @@ import { getResposta6 } from "@/services/perguntas_v2";
 		</div>
 	  </div>
 	);
-  }
+}

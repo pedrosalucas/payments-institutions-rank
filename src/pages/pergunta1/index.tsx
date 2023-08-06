@@ -2,28 +2,31 @@ import { Grid, Text} from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css'
 import Pergunta1Chart from "@/components/perguntas/pergunta1/grafico";
 import { getResposta } from "@/services/perguntas_v1";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
-import { Spacer, Loading } from '@nextui-org/react'
+import { Spacer, Loading } from '@nextui-org/react';
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
 export default function Pergunta1() {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => {
-    async function respostaPergunta1() {
-      try {
-        const response = await getResposta(1);
-        setData(response);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false); 
-      }
+  async function respostaPergunta1() {
+    try {
+      const response = await getResposta(1);
+      setData(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false); 
     }
+  }
+    
+  if(!session) { return (<UnauthorizedMessage/>); }
 
-    respostaPergunta1();
-  }, []);
+  respostaPergunta1();
 
   return (
     <div>

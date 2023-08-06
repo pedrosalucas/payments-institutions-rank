@@ -7,8 +7,11 @@ import { getResposta } from "@/services/perguntas_v1";
 import Select from "react-select";
 import { getResposta9 } from "@/services/perguntas_v2";
 import { Spacer } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
 export default function Pergunta9Page() {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_irregularidade_por_if[]>([]);
   const options = [];
 
@@ -16,19 +19,19 @@ export default function Pergunta9Page() {
     options.push({ value: ano, label: String(ano) });
   }
 
-  useEffect(() => {
-    async function respostaPergunta9() {
-      const response = await getResposta(9);
-      setData(response);
-    }
-
-    respostaPergunta9();
-  }, []);
+  async function respostaPergunta9() {
+    const response = await getResposta(9);
+    setData(response);
+  }
 
   const handleChange = async (opcaoSelecionada : any) => {
     const newData = await getResposta9(opcaoSelecionada.value);
     setData(newData);
   };
+
+  if(!session) { return (<UnauthorizedMessage/>); }
+
+  respostaPergunta9();
 
   return (
     <div >
