@@ -74,11 +74,9 @@ const RegisterForm = () => {
               Já possui uma conta? <a href="../login"> Faça o Login.</a>
             </p>
           <Spacer y={1}/>
-          <Button  size='lg' disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</Button>
+          <Button type="submit" size="lg" disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</Button>
         </div>
       </div>
-
-      
     </form>
   );
 }
