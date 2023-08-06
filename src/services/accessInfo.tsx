@@ -11,6 +11,8 @@ export async function setNewAccessInfo(accessInfo: tb_historico_acesso) {
     nm_cidade: accessInfo.nm_cidade,
     nm_estado: accessInfo.nm_estado,
     nm_pais: accessInfo.nm_pais,
+    x_latitude: accessInfo.x_latitude,
+    y_longitude: accessInfo.y_longitude,
   };
 
   const response = await fetch(`${URL_PATH}/api/accessInfo/newAccess/`, {

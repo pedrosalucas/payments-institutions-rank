@@ -11,7 +11,6 @@ export default async function handler(
   if (!ip && forwardedFor) {
     ip = forwardedFor?.split(",").at(0) ?? "Unknown";
   }
-
   switch (requestMethod) {
     case "POST":
       const requestBody = req.body;
@@ -25,7 +24,12 @@ export default async function handler(
         }
       );
       const data = await response.json();
-      res.status(200).json({ access_ip: ip, data: data });
+      res.status(200).json({
+        access_ip: ip,
+        lat: Number.parseFloat(requestBody.lat),
+        lng: Number.parseFloat(requestBody.lng),
+        data: data,
+      });
       break;
     default:
       return res

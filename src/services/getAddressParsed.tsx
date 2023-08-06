@@ -1,4 +1,5 @@
 import { tb_historico_acesso } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 type Address = {
   long_name: string;
@@ -8,10 +9,11 @@ type Address = {
 
 export default function addressParser(
   addressObject: Address[],
-  accessIp: string
+  accessIp: string,
+  lat: number,
+  lng: number
 ): tb_historico_acesso {
   let accessAddress = {} as tb_historico_acesso;
-
   for (const address of addressObject) {
     if (
       address.types.includes("administrative_area_level_2") &&
@@ -31,5 +33,7 @@ export default function addressParser(
     }
   }
   accessAddress.ip_acesso = accessIp;
+  accessAddress.x_latitude = lat;
+  accessAddress.y_longitude = lng;
   return accessAddress;
 }
