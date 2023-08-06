@@ -13,24 +13,27 @@ const RegisterForm = () => {
   });
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || '/'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
+      setError("");
       const res = await register(formValue);
 
-      console.log(res);
       setLoading(false);
       if(!res?.error) {
-        // router.push(callbackUrl);
+        router.push(`/login?callbackUrl=${searchParams.get('callbackUrl')}`);
       } else {
-        setError("invalid");
+        if(res?.error) {
+          setError(res?.error);
+        } else {
+          setError("Erro ao cadastrar usuário.");
+        }
       }
     } catch (err: any) {
+      setError("Dados inválidos.");
       setLoading(false);
-      setError(err);
     }
   };
 
@@ -72,6 +75,8 @@ const RegisterForm = () => {
           <p>
             Já possui uma conta? <a href="../login"> Faça o Login.</a>
           </p>
+          <Spacer y={1}/>
+          <p style={{ color: 'red' }}>{error}</p>
           <Spacer y={1}/>
 
           <Button type="submit" size="lg" disabled={loading}>{loading ? "Carregando..." : "Cadastrar"}</Button>
