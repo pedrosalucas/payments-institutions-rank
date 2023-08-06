@@ -1,29 +1,32 @@
 import { Grid, Text } from "@geist-ui/core";
 import styles from '@/styles/Perguntas.module.css';
 import { getResposta } from "@/services/perguntas_v1";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta2Table from "@/components/perguntas/pergunta2/tabela";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
+import { useSession } from "next-auth/react";
 import { Loading } from '@nextui-org/react'; 
-
+  
 export default function Pergunta2() {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar o loading
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function respostaPergunta2() {
-      try {
-        const response = await getResposta(2);
-        setData(response);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
+  async function respostaPergunta2() {
+    try {
+      const response = await getResposta(2);
+      setData(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    respostaPergunta2();
-  }, []);
+  if(!session) { return (<UnauthorizedMessage/>); }
+
+  respostaPergunta2();
 
   return (
     <div className={styles.grid}>

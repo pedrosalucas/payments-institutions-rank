@@ -4,28 +4,31 @@ import { getResposta } from "@/services/perguntas_v1";
 import { useState, useEffect } from "react";
 import { tb_reclamacao_cliente_por_if } from "@prisma/client";
 import Pergunta5Table from "@/components/perguntas/pergunta5/tabela";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
+import { useSession } from "next-auth/react";
 import { Loading } from '@nextui-org/react';
-
+    
 export default function Pergunta5() {
+  const { data: session } = useSession();
   const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function respostaPergunta5() {
-      try {
-        const response = await getResposta(5);
-        setData(response);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
+  async function respostaPergunta5() {
+    try {
+      const response = await getResposta(5);
+      setData(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    respostaPergunta5();
-  }, []);
-
-  return (
+  if(!session) { return (<UnauthorizedMessage/>); }
+  
+  respostaPergunta5();
+  
+  return(
     <div className={styles.grid}>
       <div className={styles.flexmid}>
         <Text marginBottom="2vh" h1 style={{ letterSpacing: '0.6px' }}>

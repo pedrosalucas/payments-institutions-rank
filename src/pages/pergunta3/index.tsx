@@ -6,20 +6,14 @@ import { getBancos } from "@/services/getBancos";
 import { Spacer } from "@nextui-org/react";
 import styles from '@/styles/Perguntas.module.css'
 import Select from "react-select";
+import { useSession } from "next-auth/react";
+import UnauthorizedMessage from "@/components/UnauthorizedMessage";
 
-  export default function Pergunta3() {
+export default function Pergunta3() {
+	const { data: session } = useSession();
 	const [data, setData] = useState<tb_reclamacao_cliente_por_if[]>([]);
 	const [options, setOptions] = useState([]);
 	const [bancoSelected, setBancoSelected] = useState("");
-
-	useEffect(() => {
-		async function populaBancos() {
-			const bancos: any = await getBancos();
-			setOptions(bancos);
-		}
-
-		populaBancos();
-	}, []);
 
 	useEffect(() => {
 		async function queryPergunta3(nm_banco: string) {
@@ -30,6 +24,15 @@ import Select from "react-select";
 		if (bancoSelected !== "")
 			queryPergunta3(bancoSelected) ;
 	}, [bancoSelected]);
+
+	async function populaBancos() {
+		const bancos: any = await getBancos();
+		setOptions(bancos);
+	}
+
+	if(!session) { return (<UnauthorizedMessage/>); }
+
+	populaBancos();
 
 	//função alterada visando a correção do onChange dentro do <Select/>
 	const handleChange = (newValue: any| null) => {
