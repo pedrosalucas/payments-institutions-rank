@@ -33,11 +33,7 @@ const LoginForm = () => {
       if(!res?.error) {
         router.push(callbackUrl);
       } else {
-        if(res?.error) {
-          setError(res?.error);
-        } else {
-          setError("Erro ao cadastrar usuário.");
-        }
+        setError("Dados inválidos.");
       }
     } catch (err: any) {
       setError("Dados inválidos.");
@@ -83,7 +79,7 @@ const LoginForm = () => {
           <p style={{ color: 'red' }}>{error}</p>
           <Spacer y={1}/>
 
-          <button type="submit" disabled={loading}>{loading ? "Carregando..." : "Entrar"}</button>
+          <Button type="submit" size="lg" disabled={loading}>{loading ? "Carregando..." : "Entrar"}</Button>
         </form>
       </div>
     </div>
