@@ -37,3 +37,32 @@ CREATE TABLE "tb_reclamacao_cliente_por_if" (
     CONSTRAINT "tb_reclamacao_cliente_por_if_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "user" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "tb_historico_acesso" (
+    "ip_acesso" VARCHAR(35) NOT NULL,
+    "nm_cidade" VARCHAR(60),
+    "nm_estado" VARCHAR(60),
+    "nm_pais" VARCHAR(60) NOT NULL,
+    "cont_acessos" BIGINT NOT NULL DEFAULT 1,
+    "ultima_atualizacao" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "x_latitude" REAL,
+    "y_longitude" REAL,
+
+    CONSTRAINT "tb_historico_acessos_pkey" PRIMARY KEY ("ip_acesso")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "user_id_key" ON "user"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
+
