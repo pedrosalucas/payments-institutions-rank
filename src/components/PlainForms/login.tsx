@@ -33,11 +33,15 @@ const LoginForm = () => {
       if(!res?.error) {
         router.push(callbackUrl);
       } else {
-        setError("invalid");
+        if(res?.error) {
+          setError(res?.error);
+        } else {
+          setError("Erro ao cadastrar usuário.");
+        }
       }
     } catch (err: any) {
+      setError("Dados inválidos.");
       setLoading(false);
-      setError(err);
     }
   };
 
