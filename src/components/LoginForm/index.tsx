@@ -51,38 +51,40 @@ const LoginForm = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.loginbox}>
-        <h1>Login</h1>
-        <Input
-          required
-          type="email"
-          name="email"
-          value={formValue.email}
-          onChange={handleChange}
-          clearable
-          label="Email"
-          placeholder="Seu email...."
-          size="xl" width="100%"
-        />
-        <Input.Password
-          required
-          type="password"
-          name="password"
-          value={formValue.password}
-          onChange={handleChange}
-          label="Senha"
-          placeholder="Sua Senha...."
-          size="xl" width="100%"
-        />
-        <Spacer y={1}/>
-        <p>
-          Não possui uma conta? <a href="../register"> Faça o cadastro.</a>
-        </p>
-        <Spacer y={1}/>
-        <Button size='lg'  onClick={handleSubmit} disabled={loading}>{loading ? "Carregando..." : "Entrar"}</Button>
+    <form onSubmit={handleSubmit}>
+      <div className={styles.container}>
+        <div className={styles.loginbox}>
+          <h1>Login</h1>
+          <Input
+            required
+            type="email"
+            name="email"
+            value={formValue.email}
+            onChange={handleChange}
+            clearable
+            label="Email"
+            placeholder="Seu email...."
+            size="xl" width="100%"
+          />
+          <Input.Password
+            required
+            type="password"
+            name="password"
+            value={formValue.password}
+            onChange={handleChange}
+            label="Senha"
+            placeholder="Sua Senha...."
+            size="xl" width="100%"
+          />
+          <Spacer y={1}/>
+          <p>
+            Não possui uma conta? <a href="../register"> Faça o cadastro.</a>
+          </p>
+          <Spacer y={1}/>
+          <Button type="submit" size="lg" disabled={loading}>{loading ? "Carregando..." : "Entrar"}</Button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
 
