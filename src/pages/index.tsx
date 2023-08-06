@@ -1,11 +1,13 @@
 import Head from "next/head";
-import { Text, Spacer, Table, Button } from "@geist-ui/core";
+import { Text, Spacer, Table } from "@geist-ui/core";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import Cards from "@/components/cards/cards";
 import { useEffect, useState } from "react";
 import { getVisitorAddress } from "@/services/getVisitorAddress";
-import { getVisitorsCount } from "@/services/getVisitorsCount";
+import { setNewAccessInfo } from "@/services/accessInfo";
+import addressParser from "@/services/getAddressParsed";
+import { tb_historico_acesso } from "@prisma/client";
 
 const inter = Inter({ subsets: ["vietnamese"] });
 
@@ -28,26 +30,32 @@ export default function Home() {
         (error) => console.error(error)
       );
     }
-
-    visitorsCount();
   }, []);
+
+  const setNewAccess = async (acessObject: tb_historico_acesso) => {
+    const response = await setNewAccessInfo(acessObject);
+  };
 
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
-      const data = await getVisitorAddress(latitude, longitude);
+      const visitorAddress = await getVisitorAddress(latitude, longitude);
+      const data = visitorAddress.data;
+
       if (data?.results?.length > 0) {
         const address = data.results[0].formatted_address;
         setUserAddress(address);
+        setNewAccess(
+          addressParser(
+            data.results[0].address_components,
+            visitorAddress.access_ip,
+            visitorAddress.lat,
+            visitorAddress.lng
+          )
+        );
       }
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const visitorsCount = async () => {
-    const visitorsAmount: { id: string; value: number } =
-      await getVisitorsCount();
-    setVisitorsAmount(visitorsAmount.value);
   };
 
   const handleGetLocationClick = () => {
@@ -91,17 +99,13 @@ export default function Home() {
       <Spacer h={3} />
       <Table></Table>
 
-      <Text h2>
-        Quantidade de Acessos: {visitorsAmount ? visitorsAmount : ""}
-      </Text>
-
       {userAddress ? (
         <div>
           <Text h3>Seu endereço:</Text>
           <Text>{userAddress}</Text>
         </div>
       ) : (
-        <Button onClick={handleGetLocationClick}>Obter Localização</Button>
+        <></>
       )}
     </>
   );

@@ -39,3 +39,14 @@ model tb_reclamacao_cliente_por_if {
   qtd_clientes_ccs                      Int?    @default(0)
   qtd_clientes_scr                      Int?    @default(0)
 }
+
+model tb_historico_acesso {
+  ip_acesso          String   @id(map: "tb_historico_acessos_pkey") @db.VarChar(35)
+  nm_cidade          String?  @db.VarChar(60)
+  nm_estado          String?  @db.VarChar(60)
+  nm_pais            String   @db.VarChar(60)
+  cont_acessos       BigInt   @default(1)
+  ultima_atualizacao DateTime @default(now()) @db.Timestamp(6)
+  x_latitude         Float?   @db.Real
+  y_longitude        Float?   @db.Real
+}
