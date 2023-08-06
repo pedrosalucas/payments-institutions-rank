@@ -27,6 +27,7 @@ const Navbar = () => {
           <Button onClick={() => router.push(`/login?callbackUrl=${pathname}`)}>
             Login
           </Button>
+          <Spacer x={2}/>
           <Button onClick={() => router.push(`/register?callbackUrl=${pathname}`)}>
             Cadastro
           </Button>

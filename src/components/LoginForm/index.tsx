@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import styles from '@/styles/Auth.module.css'
-import {Button, FormElement, Input, Spacer} from '@nextui-org/react'
+import { Button, FormElement, Input, Spacer } from '@nextui-org/react';
+import styles from '@/styles/Auth.module.css';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -33,11 +33,7 @@ const LoginForm = () => {
       if(!res?.error) {
         router.push(callbackUrl);
       } else {
-        if(res?.error) {
-          setError(res?.error);
-        } else {
-          setError("Erro ao cadastrar usuário.");
-        }
+        setError("Dados inválidos.");
       }
     } catch (err: any) {
       setError("Dados inválidos.");
@@ -51,10 +47,10 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.container}>
-        <div className={styles.loginbox}>
-          <h1>Login</h1>
+    <div className={styles.container}>
+      <div className={styles.loginbox}>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
           <Input
             required
             type="email"
@@ -76,15 +72,17 @@ const LoginForm = () => {
             placeholder="Sua Senha...."
             size="xl" width="100%"
           />
+
           <Spacer y={1}/>
-          <p>
-            Não possui uma conta? <a href="../register"> Faça o cadastro.</a>
-          </p>
+          <p> Não possui uma conta? <a href="../register"> Faça o cadastro.</a> </p>
           <Spacer y={1}/>
+          <p style={{ color: 'red' }}>{error}</p>
+          <Spacer y={1}/>
+
           <Button type="submit" size="lg" disabled={loading}>{loading ? "Carregando..." : "Entrar"}</Button>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 

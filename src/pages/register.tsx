@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/PlainForms/register";
+import RegisterForm from "@/components/RegisterForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
