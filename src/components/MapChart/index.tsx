@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
 import Filter from "./Filter";
 import MapView from "./MapView";
+import { getCitiesList, getCitySum, getCountriesList, getCountrySum, getStateSum, getStatesList } from "@/services/accessInfo";
 
 const MapChart = () => {
   const [countryName , setCountryName] = useState<string | null>(null);
@@ -20,6 +21,38 @@ const MapChart = () => {
           .then( json => json.results[0].geometry);
     return res;
   };
+
+  const fetchCountriesList = async () => {
+    const res = await getCountriesList();
+    console.log(res);
+  };
+
+  const fetchStateList = async () => {
+    const res = await getStatesList('Brazil');
+    console.log(res);
+  };
+
+  const fetchCityList = async () => {
+    const res = await getCitiesList('Brazil', 'Sergipe');
+    console.log(res);
+  };
+
+  const fetchCountrySum = async () => {
+    const res = await getCountrySum('Brazil');
+    console.log(res);
+  };
+
+  const fetchStateSum = async () => {
+    const res = await getStateSum('Brazil', 'Sergipe');
+    console.log(res);
+  };
+
+  const fetchCitySum = async () => {
+    const res = await getCitySum('Brazil', 'Sergipe', 'Aracaju');
+    console.log(res);
+  };
+
+  fetchCitySum();
 
   useEffect(() => {
     const buildMapView = async (address: string, localName: string, zoom: number) => {

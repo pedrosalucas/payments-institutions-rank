@@ -32,3 +32,41 @@ export async function getAccessHistory() {
   const data = await response.json();
   return data;
 }
+
+export async function getCountriesList() {
+  const response = await fetch(`${URL_PATH}/api/accessInfo/countries/list`);
+  const data = await response.json();
+  return data;
+}
+
+export async function getStatesList(countryName: string) {
+  const response = await fetch(`${URL_PATH}/api/accessInfo/states/list?country=${countryName}`);
+  const data = await response.json();
+  return data;
+}
+
+export async function getCitiesList(countryName: string, stateName: string) {
+  const response = await fetch(`${URL_PATH}/api/accessInfo/cities/list?country=${countryName}&state=${stateName}`);
+  const data = await response.json();
+  return data;
+}
+
+export async function getCountrySum(countryName: string) {
+  const response = await fetch(`${URL_PATH}/api/accessInfo/countries/sum_access?country=${countryName}`);
+  const data = await response.json();
+  return data;
+}
+
+export async function getStateSum(countryName: string, stateName: string) {
+  const response = await fetch(`${URL_PATH}/api/accessInfo/states/sum_access?country=${countryName}&state=${stateName}`);
+  const data = await response.json();
+  return data;
+}
+
+export async function getCitySum(countryName: string, stateName: string, cityName: string) {
+  const response = await fetch(
+    `${URL_PATH}/api/accessInfo/cities/sum_access?country=${countryName}&state=${stateName}&city=${cityName}`
+  );
+  const data = await response.json();
+  return data;
+}
