@@ -13,24 +13,29 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const sessionContextButtons = () => {
-    if(session) {
+    if (session) {
       return (
         <>
-          <Button onClick={() => signOut()}>
+          <a className={styles.link} onClick={() => signOut()}>
             Sair
-          </Button>
+          </a>
         </>
       );
-    } else if(pathname != '/login' && pathname != '/register') {
+    } else if (pathname != '/login' && pathname != '/register') {
       return (
         <>
-          <Button onClick={() => router.push(`/login?callbackUrl=${pathname}`)}>
+          <a
+            onClick={() => router.push(`/login?callbackUrl=${pathname}`)}
+            className={styles.link}
+          >
             Login
-          </Button>
-          <span></span>
-          <Button onClick={() => router.push(`/register?callbackUrl=${pathname}`)}>
+          </a>
+          <span> </span>
+          <a onClick={() => router.push(`/register?callbackUrl=${pathname}`)}
+            className={styles.link}
+          >
             Cadastro
-          </Button>
+          </a>
         </>
       );
     }
@@ -47,7 +52,7 @@ const Navbar = () => {
               PIR
             </Text>
           </Link>
-          <Spacer x={2}/>
+          <Spacer x={2} />
           <Link href="/about">
             <Text> Sobre Nós</Text>
           </Link>
