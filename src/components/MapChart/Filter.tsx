@@ -14,12 +14,8 @@ const Filter = ({ title, value, options, setName, disabled, isLoading, callbackO
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     const newValue = e.target.value;
-    console.log(newValue);
 
-    if (newValue === '') {
-      callbackOnChange();
-    }
-
+    callbackOnChange();
     setName(newValue);
   };
 
@@ -35,6 +31,8 @@ const Filter = ({ title, value, options, setName, disabled, isLoading, callbackO
       >
         <option className={styles.option} value=""></option>
         {options.map((option: string) => {
+          if (option === '' || option === null || option === undefined) return (null);
+
           return (
             <option className={styles.option} key={option} value={option}>
               {option.replace(/\b\w/g, l => l.toUpperCase())}
