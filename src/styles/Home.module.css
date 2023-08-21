@@ -1,9 +1,18 @@
 .main {
-  
+
   flex-direction: column;
   /*justify-content: space-around;
   align-items: center;*/
   padding: 2vh 10vh;
+}
+
+.link {
+  cursor: pointer;
+  color: white;
+}
+
+.link:hover {
+  color: cyan;
 }
 
 .navbar {
@@ -13,7 +22,7 @@
   align-items: center;
   padding: 2vh 10vh;
   top: 0px;
-  right: 0px; 
+  right: 0px;
   left: 0px;
 }
 
@@ -23,7 +32,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+
   color: aqua;
 }
 
@@ -34,7 +43,7 @@
 }
 
 .containerModule {
-  flex:1;
+  flex: 1;
   background-color: white;
 }
 
@@ -48,11 +57,11 @@
   table-layout: fixed;
   width: fit-content;
 
-  
+
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  
+
 }
 
 .modules {
@@ -109,7 +118,7 @@
   border-radius: 8px;
   outline: auto;
   outline-offset: 2vh;
-  
+
 }
 
 .card {
@@ -173,6 +182,7 @@
 .logo {
   position: relative;
 }
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -244,11 +254,9 @@
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
     background-clip: padding-box;
     backdrop-filter: blur(24px);
   }
@@ -259,11 +267,9 @@
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background-end-rgb)) 40%);
     z-index: 1;
   }
 }
@@ -289,7 +295,25 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
+}
+
+.select_map {
+  width: 85%;
+  height: 85%;
+  background-color: rgb(255 255 255 / 10%);
+  padding: 5px 15px 5px;
+  border-radius: 10px;
+}
+
+.select_map:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.option {
+  background-color: #111;
 }
