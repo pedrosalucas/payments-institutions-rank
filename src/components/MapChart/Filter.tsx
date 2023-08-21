@@ -35,7 +35,7 @@ const Filter = ({ title, value, options, setName, disabled, isLoading, callbackO
 
           return (
             <option className={styles.option} key={option} value={option}>
-              {option.replace(/\b\w/g, l => l.toUpperCase())}
+              {option}
             </option>
           );
         })}
