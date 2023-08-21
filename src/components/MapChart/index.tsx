@@ -101,7 +101,6 @@ const MapChart = () => {
 
     fetchCountriesList();
     fetchDataAndBuildMapView();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryName, stateName, cityName, buildMapView, citySum, countrySum, stateSum]);
 
   return (
