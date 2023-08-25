@@ -56,3 +56,10 @@ model tb_historico_acesso {
   x_latitude         Float?   @db.Real
   y_longitude        Float?   @db.Real
 }
+
+model tb_historico_atualizacao {
+  id             Int      @id(map: "tb_historico_atualizacoes_pkey") @default(autoincrement())
+  nr_ano         Int
+  dt_atualizacao DateTime @db.Date
+  nr_trimestre   Int
+}
