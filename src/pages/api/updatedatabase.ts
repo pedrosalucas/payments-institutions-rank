@@ -37,6 +37,7 @@ export default async function handler(
 
   switch (requestMethod) {
     case "GET":
+      res.status(404).json({ status: 404, message: "Method not allowed." });
       break;
     case "POST":
       res.status(resp.status).json(resp);
