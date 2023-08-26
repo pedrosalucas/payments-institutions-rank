@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/db"; //Prisma global instance
+import { Prisma } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,11 +8,14 @@ export default async function handler(
 ) {
   const requestMethod = req.method;
   const new_data = req.body;
+  var inserts: Prisma.BatchPayload = { count: 0 };
 
-  const inserts = await prisma.tb_irregularidade_por_if.createMany({
-    data: new_data,
-    skipDuplicates: true,
-  });
+  if (new_data.length > 0) {
+    inserts = await prisma.tb_irregularidade_por_if.createMany({
+      data: new_data,
+      skipDuplicates: true,
+    });
+  }
 
   var updateTbHistoricoAtualizacao: number = 0;
 
