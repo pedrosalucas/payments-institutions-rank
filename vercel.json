@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/updatedatabase",
+      "schedule": "0 23 25 */3 *"
+    }
+  ]
+}
