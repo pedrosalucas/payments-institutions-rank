@@ -17,19 +17,8 @@ export default async function handler(
     });
   }
 
-  var updateTbHistoricoAtualizacao: number = 0;
-
-  if (inserts.count > 0) {
-    updateTbHistoricoAtualizacao = await prisma.$executeRaw`
-			UPDATE tb_historico_atualizacao
-			SET nr_trimestre = (CASE WHEN nr_trimestre = 4 THEN 1 ELSE nr_trimestre + 1 END),
-			nr_ano = (CASE WHEN nr_trimestre = 4 THEN nr_ano + 1 ELSE nr_ano END),
-			dt_atualizacao = now();
-		`;
-  }
-
   var resp;
-  if (inserts.count > 0 && updateTbHistoricoAtualizacao > 0) {
+  if (inserts.count > 0) {
     resp = { status: 200, message: "Database Updated." };
   } else {
     resp = { status: 400, message: "Database has not been updated." };
@@ -37,7 +26,7 @@ export default async function handler(
 
   switch (requestMethod) {
     case "GET":
-      res.status(404).json({ status: 404, message: "Method not allowed." });
+      res.status(400).json({ status: 400, message: "Method not allowed." });
       break;
     case "POST":
       res.status(resp.status).json(resp);
@@ -46,3 +35,10 @@ export default async function handler(
       break;
   }
 }
+
+export const config = {
+  api: {
+    responseLimit: false,
+    // responseLimit: '8mb',
+  },
+};
