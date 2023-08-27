@@ -1,13 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/db"; //Prisma global instance
-import { Prisma } from "@prisma/client";
+import { Prisma, tb_historico_atualizacao } from "@prisma/client";
+import { getData } from "@/services/lastdata";
+import { getNextTrimestre } from "@/services/getlastupdate";
+import { updateHistorico } from "@/services/updatehistorico";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const requestMethod = req.method;
-  const new_data = req.body;
+
+  const periodo: tb_historico_atualizacao = await getNextTrimestre();
+  const new_data = await getData(periodo.nr_ano, periodo.nr_trimestre);
+
   var inserts: Prisma.BatchPayload = { count: 0 };
 
   if (new_data.length > 0) {
@@ -19,17 +25,16 @@ export default async function handler(
 
   var resp;
   if (inserts.count > 0) {
-    resp = { status: 200, message: "Database Updated." };
+    resp = await updateHistorico();
   } else {
     resp = { status: 400, message: "Database has not been updated." };
   }
 
   switch (requestMethod) {
     case "GET":
-      res.status(400).json({ status: 400, message: "Method not allowed." });
+      res.status(resp.status).json(resp);
       break;
     case "POST":
-      res.status(resp.status).json(resp);
       break;
     default:
       break;

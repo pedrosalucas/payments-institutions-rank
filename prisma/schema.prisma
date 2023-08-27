@@ -63,3 +63,21 @@ model tb_historico_atualizacao {
   dt_atualizacao DateTime @db.Date
   nr_trimestre   Int
 }
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model tb_armengo {
+  id                                    Int     @default(autoincrement())
+  ds_ano                                Int
+  ds_trimestre                          String  @db.VarChar(2)
+  ds_categoria                          String  @db.VarChar(100)
+  tp_instituicao                        String  @db.VarChar(50)
+  ds_cnpj_if                            String? @db.VarChar(11)
+  nm_instituicao_financeira             String  @db.VarChar(150)
+  ds_irregularidade                     String? @db.VarChar(250)
+  qtd_reclamacoes_reguladas_procedentes Int?    @default(0)
+  qtd_reclamacoes_reguladas_outras      Int?    @default(0)
+  qtd_reclamacoes_nao_reguladas         Int?    @default(0)
+  qtd_total_reclamacoes                 Int?    @default(0)
+
+  @@ignore
+}
